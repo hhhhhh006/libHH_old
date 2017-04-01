@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{3ce1e3c7-c2bb-4540-8525-d707f1e574ec}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{67ea3de6-7ea4-40b3-91c2-0279a091ecc4}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{a4ecdfa2-998e-466a-90d1-9d571c7aa78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{7d52e011-5f08-4734-824e-77740018b746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="content">
+      <UniqueIdentifier>{bb71e89b-714f-4a57-a5f8-8c88d67ace80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\memory">
+      <UniqueIdentifier>{ac45124b-28c1-4f9f-8230-6c215a70aecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\message_loop">
+      <UniqueIdentifier>{f52c2279-8f36-4b21-9826-e11d17d23631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\threading">
+      <UniqueIdentifier>{444346f4-15c3-41a2-8e45-a11e3c017391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ipc">
+      <UniqueIdentifier>{f9f55087-0fe6-4d81-8a98-b775123b4f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\synchronization">
+      <UniqueIdentifier>{05f2d950-aa83-47f4-9a0a-49babcab135a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="libhh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_child_process_launcher.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_child_process_launcher.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_impl.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_impl.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\child_process_launcher.cpp">
+      <Filter>content</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\pickle.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\pending_task.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\task_runner.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\process_impl.cpp">
+      <Filter>content</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\render_process.cpp">
+      <Filter>content</Filter>
+    </ClCompile>
+    <ClCompile Include="Content\render_process_host.cpp">
+      <Filter>content</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\lazy_instance.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\memory\aligned_memory.cpp">
+      <Filter>base\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\incoming_task_queue.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_loop.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_loop_task_runner.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_pump.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_pump_default.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_pump_ui.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\thread.cpp">
+      <Filter>base\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\thread_local.cpp">
+      <Filter>base\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_impl.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_reader.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_message.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_message_utils.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\message_filter.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\message_filter_router.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="base\at_exit.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\synchronization\lock.cpp">
+      <Filter>base\synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="base\synchronization\waitable_event.cpp">
+      <Filter>base\synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="base\memory\ref_counted.cpp">
+      <Filter>base\message_loop</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="libhh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libhh_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\render_process_host.h">
+      <Filter>content</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\render_process.h">
+      <Filter>content</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\pickle.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\bits.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\callback.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\pending_task.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\task_runner.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\single_thread_task_runner.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\time.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Content\process_impl.h">
+      <Filter>content</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\atomicops.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\atomicops_internals_x86_msvc.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\lazy_instance.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\compiler_specific.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Build\build_config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\atomicops_internals_portable.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\atomicops_internals_atomicword_compat.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\macros.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\aligned_memory.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\incoming_task_queue.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_loop.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_loop_task_runner.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_pump.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_pump_default.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_pump_ui.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+    <ClInclude Include="base\Threading\thread_local.h">
+      <Filter>base\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_reader.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_listener.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message_null_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message_start.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message_utils.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_message_utils_impl.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\ipc_param_traits.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_sender.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\message_dispatch.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\message_filter.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\message_filter_router.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\param_traits_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\param_traits_read_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\param_traits_write_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\struct_constructor_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\struct_destructor_macros.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="base\at_exit.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\atomic_ref_count.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\atomic_sequence_num.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\base_export.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_export.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="content\content_export.h">
+      <Filter>content</Filter>
+    </ClInclude>
+    <ClInclude Include="base\synchronization\lock.h">
+      <Filter>base\synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="base\synchronization\waitable_event.h">
+      <Filter>base\synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\ref_counted.h">
+      <Filter>base\message_loop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Content\child_process_launcher.h">
+      <Filter>content</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Base\Threading\thread.h">
+      <Filter>base\threading</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ipc\ipc_channel_impl.h">
+      <Filter>ipc</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

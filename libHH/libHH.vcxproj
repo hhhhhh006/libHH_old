@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F772B532-90C4-4E65-88B5-FD411BA150DB}</ProjectGuid>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_NETWORK_LIB;LIBHH_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtNetwork;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Networkd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_NETWORK_LIB;LIBHH_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtNetwork;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Network.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="base\at_exit.cpp" />
+    <ClCompile Include="Base\lazy_instance.cpp" />
+    <ClCompile Include="base\memory\aligned_memory.cpp" />
+    <ClCompile Include="base\memory\ref_counted.cpp" />
+    <ClCompile Include="base\message_loop\message_pump_ui.cpp" />
+    <ClCompile Include="base\message_loop\message_pump_default.cpp" />
+    <ClCompile Include="Base\pickle.cpp" />
+    <ClCompile Include="base\synchronization\lock.cpp" />
+    <ClCompile Include="base\threading\thread.cpp" />
+    <ClCompile Include="base\threading\thread_local.cpp" />
+    <ClCompile Include="base\synchronization\waitable_event.cpp" />
+    <ClCompile Include="Content\child_process_launcher.cpp" />
+    <ClCompile Include="Content\process_impl.cpp" />
+    <ClCompile Include="Content\render_process.cpp" />
+    <ClCompile Include="Content\render_process_host.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_child_process_launcher.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_impl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_child_process_launcher.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_impl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\incoming_task_queue.cpp" />
+    <ClCompile Include="ipc\ipc_channel.cpp" />
+    <ClCompile Include="ipc\ipc_channel_impl.cpp" />
+    <ClCompile Include="ipc\ipc_channel_reader.cpp" />
+    <ClCompile Include="ipc\ipc_message.cpp" />
+    <ClCompile Include="ipc\ipc_message_utils.cpp" />
+    <ClCompile Include="ipc\message_filter.cpp" />
+    <ClCompile Include="ipc\message_filter_router.cpp" />
+    <ClCompile Include="libhh.cpp" />
+    <ClCompile Include="Base\pending_task.cpp" />
+    <ClCompile Include="Base\task_runner.cpp" />
+    <ClCompile Include="base\message_loop\message_pump.cpp" />
+    <ClCompile Include="base\message_loop\message_loop.cpp" />
+    <ClCompile Include="base\message_loop\message_loop_task_runner.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\atomicops.h" />
+    <ClInclude Include="Base\atomicops_internals_atomicword_compat.h" />
+    <ClInclude Include="Base\atomicops_internals_portable.h" />
+    <ClInclude Include="Base\atomicops_internals_x86_msvc.h" />
+    <ClInclude Include="base\atomic_ref_count.h" />
+    <ClInclude Include="base\atomic_sequence_num.h" />
+    <ClInclude Include="base\at_exit.h" />
+    <ClInclude Include="base\base_export.h" />
+    <ClInclude Include="Base\bits.h" />
+    <ClInclude Include="Base\macros.h" />
+    <ClInclude Include="base\memory\ref_counted.h" />
+    <ClInclude Include="base\synchronization\lock.h" />
+    <ClInclude Include="base\Threading\thread_local.h" />
+    <ClInclude Include="Build\build_config.h" />
+    <ClInclude Include="Base\compiler_specific.h" />
+    <ClInclude Include="Base\lazy_instance.h" />
+    <ClInclude Include="base\memory\aligned_memory.h" />
+    <ClInclude Include="base\message_loop\message_pump_default.h" />
+    <ClInclude Include="base\message_loop\message_pump_ui.h" />
+    <ClInclude Include="Base\pickle.h" />
+    <ClInclude Include="Base\callback.h" />
+    <CustomBuild Include="Base\Threading\thread.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
+    <ClInclude Include="base\synchronization\waitable_event.h" />
+    <ClInclude Include="content\content_export.h" />
+    <ClInclude Include="Content\process_impl.h" />
+    <ClInclude Include="Content\render_process.h" />
+    <ClInclude Include="Content\render_process_host.h" />
+    <ClInclude Include="base\message_loop\incoming_task_queue.h" />
+    <ClInclude Include="ipc\ipc_channel.h" />
+    <ClInclude Include="ipc\ipc_channel_reader.h" />
+    <ClInclude Include="ipc\ipc_export.h" />
+    <ClInclude Include="ipc\ipc_listener.h" />
+    <ClInclude Include="IPC\ipc_message.h" />
+    <ClInclude Include="IPC\ipc_message_macros.h" />
+    <ClInclude Include="IPC\ipc_message_null_macros.h" />
+    <ClInclude Include="IPC\ipc_message_start.h" />
+    <ClInclude Include="IPC\ipc_message_utils.h" />
+    <ClInclude Include="IPC\ipc_message_utils_impl.h" />
+    <ClInclude Include="IPC\ipc_param_traits.h" />
+    <ClInclude Include="ipc\ipc_sender.h" />
+    <ClInclude Include="IPC\message_dispatch.h" />
+    <ClInclude Include="IPC\message_filter.h" />
+    <ClInclude Include="ipc\message_filter_router.h" />
+    <ClInclude Include="IPC\param_traits_macros.h" />
+    <ClInclude Include="IPC\param_traits_read_macros.h" />
+    <ClInclude Include="IPC\param_traits_write_macros.h" />
+    <ClInclude Include="IPC\struct_constructor_macros.h" />
+    <ClInclude Include="IPC\struct_destructor_macros.h" />
+    <ClInclude Include="Base\pending_task.h" />
+    <ClInclude Include="Base\task_runner.h" />
+    <ClInclude Include="Base\single_thread_task_runner.h" />
+    <ClInclude Include="Base\time.h" />
+    <ClInclude Include="base\message_loop\message_pump.h" />
+    <ClInclude Include="base\message_loop\message_loop.h" />
+    <ClInclude Include="base\message_loop\message_loop_task_runner.h" />
+    <CustomBuild Include="ipc\ipc_channel_impl.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ipc_channel_impl.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ipc_channel_impl.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory"</Command>
+    </CustomBuild>
+    <CustomBuild Include="Content\child_process_launcher.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing child_process_launcher.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing child_process_launcher.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory"</Command>
+    </CustomBuild>
+    <ClInclude Include="libhh.h" />
+    <ClInclude Include="libhh_global.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2010" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
