@@ -29,7 +29,11 @@
 *.app
 *.sdf
 *.suo
+*.user
 
 # Dir
 win32/
 ipch/
+Debug/
+Release/
+GeneratedFiles/
