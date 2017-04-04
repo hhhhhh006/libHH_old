@@ -1,8 +1,11 @@
 #ifndef MESSAGE_LOOP_H__
 #define MESSAGE_LOOP_H__
 
+#include <memory>
+
 #include "base/base_export.h"
 #include "base/pending_task.h"
+#include "base/memory/ref_counted.h"
 #include "base/message_loop/message_pump.h"
 #include "base/message_loop/incoming_task_queue.h"
 #include "base/message_loop/message_loop_task_runner.h"
@@ -30,7 +33,7 @@ public:
 	// Returns the MessageLoop object for the current thread, or null if none.
 	static MessageLoop* current();
 
-	static MessagePump* CreateMessagePumpForType(Type type);
+	static std::unique_ptr<MessagePump> CreateMessagePumpForType(Type type);
 
 	// NOTE: These methods may be called on any thread.  The Task will be invoked
 	// on the thread that executes MessageLoop::Run().
@@ -58,11 +61,22 @@ public:
 	// to be processed before returning from Run.
 	void QuitNow();
 
+	// Deprecated: use RunLoop instead.
+	// Construct a Closure that will call QuitWhenIdle(). Useful to schedule an
+	// arbitrary MessageLoop to QuitWhenIdle.
+	static Closure QuitWhenIdleClosure();
+
+	// Returns true if this loop is |type|. This allows subclasses (especially
+	// those in tests) to specialize how they are identified.
+	virtual bool IsType(Type type) const;
+
 	// Returns the type passed to the constructor.
 	Type type() const { return type_; }
 
 	// Gets the TaskRunner associated with this message loop.
-	SingleThreadTaskRunner* task_runner() const { return task_runner_; }
+	const scoped_refptr<SingleThreadTaskRunner>& task_runner() const { 
+		return task_runner_; 
+	}
 
 	// Can only be called from the thread that owns the MessageLoop.
 	bool is_running() const;
@@ -71,13 +85,13 @@ public:
 	void RunTask(const PendingTask& pending_task);
 
 protected:
-	MessagePump* pump_;
+	std::unique_ptr<MessagePump> pump_;
 
 private:
 	friend class internal::IncomingTaskQueue;
 	friend class Thread;
 
-	MessageLoop(Type type, int placeholder);
+	MessageLoop(Type type, int shadow);
 
 	// Creates a MessageLoop without binding to a thread.
 	// If |type| is TYPE_CUSTOM non-null |pump_factory| must be also given
@@ -90,7 +104,7 @@ private:
 	// thread the message loop runs on, before calling Run().
 	// Before BindToCurrentThread() is called, only Post*Task() functions can
 	// be called on the message loop.
-	static MessageLoop* CreateUnbound(Type type);
+	static std::unique_ptr<MessageLoop> CreateUnbound(Type type);
 
 	// Configure various members and bind this message loop to the current thread.
 	void BindToCurrentThread();
@@ -143,13 +157,16 @@ private:
 	// Contains delayed tasks, sorted by their 'delayed_run_time' property.
 	DelayedTaskQueue delayed_work_queue_;
 
-	internal::IncomingTaskQueue* incoming_task_queue_;
-
-	// The task runner associated with this message loop.
-	SingleThreadTaskRunner* task_runner_;
+	scoped_refptr<internal::IncomingTaskQueue> incoming_task_queue_;
 
 	// A task runner which we haven't bound to a thread yet.
-	internal::MessageLoopTaskRunner* unbound_task_runner_;
+	scoped_refptr<internal::MessageLoopTaskRunner> unbound_task_runner_;
+
+	// The task runner associated with this message loop.
+	scoped_refptr<SingleThreadTaskRunner> task_runner_;
+
+
+	DISALLOW_COPY_AND_ASSIGN(MessageLoop);
 };
 
 

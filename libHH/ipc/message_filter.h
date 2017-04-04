@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <vector>
 
+#include "base/memory/ref_counted.h"
 #include "ipc/ipc_export.h"
 
 namespace IPC {
@@ -13,6 +14,7 @@ class Message;
 
 
 class IPC_EXPORT MessageFilter
+	: public base::RefCountedThreadSafe<MessageFilter>
 {
 
 public:
@@ -34,6 +36,9 @@ public:
 
 protected:
   virtual ~MessageFilter();
+
+private:
+	friend class base::RefCountedThreadSafe<MessageFilter>;
 
 };
 

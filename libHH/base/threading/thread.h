@@ -40,7 +40,7 @@ public:
 	// running (e.g. before Start or after Stop have been called). Callers can
 	// hold on to this even after the thread is gone; in this situation, attempts
 	// to PostTask() will fail.
-	SingleThreadTaskRunner* task_runner() const {
+	scoped_refptr<SingleThreadTaskRunner> task_runner() const {
 		return message_loop_ ? message_loop_->task_runner() : nullptr; 
 	}
 

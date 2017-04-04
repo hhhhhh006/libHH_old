@@ -7,6 +7,7 @@
 #include "base/synchronization/lock.h"
 #include "base/single_thread_task_runner.h"
 #include "base/time.h"
+#include "base/memory/ref_counted.h"
 
 namespace base {
 namespace internal {
@@ -19,7 +20,7 @@ class IncomingTaskQueue;
 class BASE_EXPORT MessageLoopTaskRunner : public SingleThreadTaskRunner
 {
 public:
-	explicit MessageLoopTaskRunner(IncomingTaskQueue* incoming_queue);
+	explicit MessageLoopTaskRunner(scoped_refptr<IncomingTaskQueue> incoming_queue);
 
 	// Initialize this message loop task runner on the current thread.
 	void BindToCurrentThread();
@@ -32,7 +33,7 @@ public:
 private:
 	~MessageLoopTaskRunner();
 
-	IncomingTaskQueue* incoming_queue_;
+	scoped_refptr<IncomingTaskQueue> incoming_queue_;
 	Qt::HANDLE valid_thread_id_;
 	mutable Lock valid_thread_id_lock_;
 };

@@ -57,6 +57,9 @@
     <Filter Include="base\synchronization">
       <UniqueIdentifier>{05f2d950-aa83-47f4-9a0a-49babcab135a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\win">
+      <UniqueIdentifier>{99a8ce4c-a963-426a-bd41-e62255552609}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libhh.cpp">
@@ -146,9 +149,6 @@
     <ClCompile Include="ipc\message_filter_router.cpp">
       <Filter>ipc</Filter>
     </ClCompile>
-    <ClCompile Include="base\at_exit.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
     <ClCompile Include="base\synchronization\lock.cpp">
       <Filter>base\synchronization</Filter>
     </ClCompile>
@@ -156,6 +156,15 @@
       <Filter>base\synchronization</Filter>
     </ClCompile>
     <ClCompile Include="base\memory\ref_counted.cpp">
+      <Filter>base\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="base\at_exit.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\win\scoped_handle.cpp">
+      <Filter>base\win</Filter>
+    </ClCompile>
+    <ClCompile Include="base\message_loop\message_pump_win.cpp">
       <Filter>base\message_loop</Filter>
     </ClCompile>
   </ItemGroup>
@@ -203,9 +212,6 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="Base\lazy_instance.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\compiler_specific.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="Build\build_config.h">
@@ -326,6 +332,18 @@
       <Filter>base\synchronization</Filter>
     </ClInclude>
     <ClInclude Include="base\memory\ref_counted.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\ptr_util.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\compiler_specific.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="base\win\scoped_handle.h">
+      <Filter>base\win</Filter>
+    </ClInclude>
+    <ClInclude Include="base\message_loop\message_pump_win.h">
       <Filter>base\message_loop</Filter>
     </ClInclude>
   </ItemGroup>

@@ -61,7 +61,7 @@ TimeTicks IncomingTaskQueue::CalculateDelayedRuntime(TimeDelta delay)
 {
 	TimeTicks delayed_run_time = 0;
 	if (delay > 0)
-		delayed_run_time = QDateTime::currentMSecsSinceEpoch() + delay;
+		delayed_run_time = TimeTicksNow + delay;
 
 	return delayed_run_time;
 }

@@ -20,13 +20,16 @@ bool Thread::Start()
 	if (isRunning())
 		return true;
 
-	message_loop_ = MessageLoop::CreateUnbound(MessageLoop::TYPE_DEFAULT);
+	std::unique_ptr<MessageLoop> message_loop = MessageLoop::CreateUnbound(
+		MessageLoop::TYPE_DEFAULT);
+	message_loop_ = message_loop.get();
+
 	QThread::start();
-
-	if (isRunning())
+	if (isRunning()) {
+		message_loop.release();
 		return true;
+	}
 
-	delete message_loop_;
 	message_loop_ = nullptr;
 	return false;
 }
@@ -47,6 +50,7 @@ bool Thread::IsRunning() const
 
 void Thread::run()
 {
+//	std::unique_ptr<MessageLoop> message_loop(message_loop_);
 	message_loop_->BindToCurrentThread();
 	message_loop_->Run();
 

@@ -5,11 +5,13 @@
 
 #include "base/base_export.h"
 #include "base/callback.h"
+#include "base/memory/ref_counted.h"
 
 namespace base
 {
 
 class BASE_EXPORT TaskRunner
+	: public RefCountedThreadSafe<TaskRunner>
 {
 public:
 	// Posts the given task to be run.  Returns true if the task may be
@@ -35,6 +37,8 @@ public:
 	virtual bool RunsTasksOnCurrentThread() const = 0;
 
 protected:
+	friend class RefCountedThreadSafe<TaskRunner>;
+
 	TaskRunner();
 	virtual ~TaskRunner();
 

@@ -15,11 +15,11 @@
 
 // Put this in the declarations for a class to be uncopyable.
 #define DISALLOW_COPY(TypeName) \
-  TypeName(const TypeName&) = delete
+  TypeName(const TypeName&)
 
 // Put this in the declarations for a class to be unassignable.
 #define DISALLOW_ASSIGN(TypeName) \
-  void operator=(const TypeName&) = delete
+  void operator=(const TypeName&)
 
 // A macro to disallow the copy constructor and operator= functions
 // This should be used in the private: declarations for a class
@@ -34,7 +34,7 @@
 // that wants to prevent anyone from instantiating it. This is
 // especially useful for classes containing only static methods.
 #define DISALLOW_IMPLICIT_CONSTRUCTORS(TypeName) \
-  TypeName() = delete;                           \
+  TypeName();                                    \
   DISALLOW_COPY_AND_ASSIGN(TypeName)
 
 // The arraysize(arr) macro returns the # of elements in an array arr.  The

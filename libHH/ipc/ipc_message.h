@@ -4,8 +4,7 @@
 #include "base/pickle.h"
 #include "ipc/ipc_export.h"
 
-namespace IPC
-{
+namespace IPC {
 
 class IPC_EXPORT Message : public base::Pickle
 {
@@ -118,7 +117,7 @@ private:
 
 };
 
-}
+}  //namespace IPC
 
 enum SpecialRoutingIDs {
 	// indicates that we don't have a routing ID yet.

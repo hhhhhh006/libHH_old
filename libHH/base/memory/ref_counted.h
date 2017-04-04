@@ -1,6 +1,8 @@
 #ifndef REF_COUNTED_H
 #define REF_COUNTED_H
 
+#include <cassert>
+
 #include "base/base_export.h"
 #include "base/macros.h"
 #include "base/atomic_ref_count.h"

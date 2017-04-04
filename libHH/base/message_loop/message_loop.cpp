@@ -59,15 +59,12 @@ MessageLoop* MessageLoop::current()
 	return lazy_tls_ptr.Pointer()->Get();
 }
 
-MessagePump* MessageLoop::CreateMessagePumpForType(Type type)
+std::unique_ptr<MessagePump> MessageLoop::CreateMessagePumpForType(Type type)
 {
-	if (type == TYPE_DEFAULT)
-		return new MessagePumpDefault();
-
 	if (type == TYPE_UI)
-		return new MessagePumpForUI();
+		return std::unique_ptr<MessagePump>(new MessagePumpForUI());
 
-	return nullptr;
+	return std::unique_ptr<MessagePump>(new MessagePumpDefault());;
 }
 
 void MessageLoop::PostTask(const Closure& task)
@@ -106,6 +103,21 @@ void MessageLoop::QuitNow()
 	}
 }
 
+static void QuitCurrentWhenIdle() {
+	MessageLoop::current()->QuitWhenIdle();
+}
+
+base::Closure MessageLoop::QuitWhenIdleClosure()
+{
+	base::Closure closure = std::bind(&QuitCurrentWhenIdle);
+	return std::bind(&QuitCurrentWhenIdle);
+}
+
+bool MessageLoop::IsType(Type type) const
+{
+	return type_ == type;
+}
+
 bool MessageLoop::is_running() const
 {
 	return is_running_;
@@ -132,12 +144,12 @@ void MessageLoop::BindToCurrentThread()
 }
 
 
-MessageLoop* MessageLoop::CreateUnbound(Type type)
+std::unique_ptr<MessageLoop> MessageLoop::CreateUnbound(Type type)
 {
-	return new MessageLoop(type, 1);
+	return std::unique_ptr<MessageLoop>(new MessageLoop(type, 1));
 }
 
-MessageLoop::MessageLoop(Type type, int placeholder)
+MessageLoop::MessageLoop(Type type, int shadow)
 	: type_(type),
 	  quit_when_idle_received_(false),
 	  pump_(nullptr),

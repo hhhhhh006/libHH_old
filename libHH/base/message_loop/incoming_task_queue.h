@@ -2,13 +2,13 @@
 #define INCOMING_TASK_QUEUE_H__
 
 #include <stdint.h>
-#include <QMutex>
 
 #include "base/base_export.h"
 #include "base/callback.h"
 #include "base/pending_task.h"
 #include "base/time.h"
 #include "base/synchronization/lock.h"
+#include "base/memory/ref_counted.h"
 
 namespace base {
 class MessageLoop;
@@ -19,6 +19,7 @@ namespace internal {
 // thread. This class takes care of synchronizing posting tasks from different
 // threads and together with MessageLoop ensures clean shutdown.
 class BASE_EXPORT IncomingTaskQueue
+	: public RefCountedThreadSafe<IncomingTaskQueue>
 {
 public:
 	explicit IncomingTaskQueue(MessageLoop* message_loop);
@@ -38,6 +39,7 @@ public:
 	void StartScheduling();
 
 private:
+	friend class RefCountedThreadSafe<IncomingTaskQueue>;
 	virtual ~IncomingTaskQueue();
 
 	// Calculates the time at which a PendingTask should run.

@@ -9,6 +9,7 @@ namespace base
 
 typedef int64_t TimeTicks;
 typedef int64_t TimeDelta;
+typedef int64_t Time;
 
 #define TimeTicksNow QDateTime::currentMSecsSinceEpoch()
 

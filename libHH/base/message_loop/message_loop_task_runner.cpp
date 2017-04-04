@@ -8,11 +8,11 @@ namespace base {
 namespace internal {
 
 
-MessageLoopTaskRunner::MessageLoopTaskRunner(IncomingTaskQueue* incoming_queue)
+MessageLoopTaskRunner::MessageLoopTaskRunner(scoped_refptr<IncomingTaskQueue> incoming_queue)
 	: incoming_queue_(incoming_queue),
 	  valid_thread_id_(0)
 {
-
+	
 }
 
 void MessageLoopTaskRunner::BindToCurrentThread()
