@@ -28,6 +28,8 @@ public:
     // the message be handled in the default way.
     virtual bool OnMessageReceived(const Message& message);
 
+    virtual void OnChannelConnected(int32_t peer_pid);
+
     // Called to query the Message classes supported by the filter.  Return
     // false to indicate that all message types should reach the filter, or true
     // if the resulting contents of |supported_message_classes| may be used to

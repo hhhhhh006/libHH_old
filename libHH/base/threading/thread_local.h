@@ -3,31 +3,32 @@
 
 #include "base/base_export.h"
 #include "base/macros.h"
+#include "base/threading/thread_local_storage.h"
 
-#include <QThreadStorage>
-
-//线程局部存储类，只能存储指针；
-//线程退出时，会自动删除所有存储指针。
+// 线程退出不删除指针内存
+// 自己管理指针内存的释放
 
 namespace base {
 
 template <typename Type>
-class ThreadLocalPointer : private QThreadStorage<Type*>
+class ThreadLocalPointer 
 {
 public:
-	ThreadLocalPointer() {}
-	~ThreadLocalPointer() {}
+    ThreadLocalPointer() {}
+    ~ThreadLocalPointer() {}
 
-	Type* Get() {
-		return localData();
-	}
+    Type* Get() {
+        return static_cast<Type*>(slot_.Get());
+    }
 
-	//再次调用，会自动删除上次存储的指针
-	void Set(Type* ptr) {
-		setLocalData(ptr);
-	}
+    void Set(Type* ptr) {
+        slot_.Set(const_cast<void*>(static_cast<const void*>(ptr)));
+    }
 
-	DISALLOW_COPY_AND_ASSIGN(ThreadLocalPointer);
+private:
+    ThreadLocalStorage::Slot slot_;
+
+    DISALLOW_COPY_AND_ASSIGN(ThreadLocalPointer<Type>);
 };
 
 

@@ -372,8 +372,8 @@ template void Pickle::WriteBytesStatic<8>(const void* data);
 
 void* Pickle::ClaimUninitializedBytesInternal(size_t num_bytes)
 {
-	size_t date_len = bits::Align(num_bytes, sizeof(uint32_t));
-	size_t new_size = write_offset_ + date_len;
+	size_t data_len = bits::Align(num_bytes, sizeof(uint32_t));
+	size_t new_size = write_offset_ + data_len;
 	if (new_size > capacity_after_header_)
 	{
 		size_t new_capacity = capacity_after_header_ * 2;
@@ -384,7 +384,8 @@ void* Pickle::ClaimUninitializedBytesInternal(size_t num_bytes)
 	}
 
 	char* write = mutable_payload() + write_offset_;
-	memset(write + num_bytes, 0, date_len - num_bytes);
+    // 用于初始化由于设置字节对齐时，实际多出来的字节
+	memset(write + num_bytes, 0, data_len - num_bytes);
 	header_->payload_size = static_cast<uint32_t>(new_size);
 	write_offset_ = new_size;
 	return write;

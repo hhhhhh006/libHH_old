@@ -71,12 +71,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_child_process_launcher.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_impl.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_impl.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="Content\child_process_launcher.cpp">
       <Filter>content</Filter>
     </ClCompile>
@@ -131,9 +125,6 @@
     <ClCompile Include="ipc\ipc_channel.cpp">
       <Filter>ipc</Filter>
     </ClCompile>
-    <ClCompile Include="ipc\ipc_channel_impl.cpp">
-      <Filter>ipc</Filter>
-    </ClCompile>
     <ClCompile Include="ipc\ipc_channel_reader.cpp">
       <Filter>ipc</Filter>
     </ClCompile>
@@ -166,6 +157,33 @@
     </ClCompile>
     <ClCompile Include="base\message_loop\message_pump_win.cpp">
       <Filter>base\message_loop</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_win.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_qt.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_qt.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_qt.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="base\memory\weak_ptr.cpp">
+      <Filter>base\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="ipc\ipc_channel_proxy.cpp">
+      <Filter>ipc</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\thread_task_runner_handle.cpp">
+      <Filter>base\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\thread_local_storage_win.cpp">
+      <Filter>base\threading</Filter>
+    </ClCompile>
+    <ClCompile Include="base\threading\thread_local_storage.cpp">
+      <Filter>base\threading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +364,24 @@
     <ClInclude Include="base\message_loop\message_pump_win.h">
       <Filter>base\message_loop</Filter>
     </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_win.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\scoped_vector.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\weak_ptr.h">
+      <Filter>base\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ipc\ipc_channel_proxy.h">
+      <Filter>ipc</Filter>
+    </ClInclude>
+    <ClInclude Include="base\threading\thread_task_runner_handle.h">
+      <Filter>base\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="base\threading\thread_local_storage.h">
+      <Filter>base\threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Content\child_process_launcher.h">
@@ -354,7 +390,7 @@
     <CustomBuild Include="Base\Threading\thread.h">
       <Filter>base\threading</Filter>
     </CustomBuild>
-    <CustomBuild Include="ipc\ipc_channel_impl.h">
+    <CustomBuild Include="ipc\ipc_channel_qt.h">
       <Filter>ipc</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -4,9 +4,11 @@
 #include <QWidget>
 #include "ui_ChildWidget.h"
 
-#include "IPC/message_filter.h"
+#include "ipc/message_filter.h"
 #include "logdata.h"
 
+#include "base/single_thread_task_runner.h"
+#include "base/memory/ref_counted.h"
 
 namespace content{
 class RenderProcess;
@@ -17,7 +19,8 @@ class ChildWidget : public QWidget, public IPC::MessageFilter
 	Q_OBJECT
 
 public:
-	ChildWidget(QWidget *parent = 0);
+	ChildWidget(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner, 
+        const QString &pipe_name, QWidget *parent = 0);
 	~ChildWidget();
 
     virtual bool OnMessageReceived(const IPC::Message& message);

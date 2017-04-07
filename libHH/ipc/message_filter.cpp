@@ -18,6 +18,12 @@ bool MessageFilter::OnMessageReceived(const Message& message)
 	return false;
 }
 
+
+void MessageFilter::OnChannelConnected(int32_t peer_pid)
+{
+
+}
+
 bool MessageFilter::GetSupportedMessageClasses(std::vector<uint32_t>* /*supported_message_classes*/) const 
 {
 	return false;

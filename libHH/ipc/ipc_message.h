@@ -20,9 +20,7 @@ public:
 
 	Message(int32_t routing_id, uint32_t type);
 
-	// Initializes a message from a const block of data.  The data is not copied;
-	// instead the data is merely referenced by this message.  Only const methods
-	// should be used on the message when initialized this way.
+    // 不执行深度拷贝，在Message生存期要保证data的有效性
 	Message(const char* data, int data_len);
 
 	Message(const Message& other);

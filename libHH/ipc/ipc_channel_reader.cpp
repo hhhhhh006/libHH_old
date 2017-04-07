@@ -1,9 +1,11 @@
-#include "ipc_channel_reader.h"
-#include "ipc_listener.h"
-#include "ipc_message.h"
+#include "ipc/ipc_channel_reader.h"
+#include "ipc/ipc_listener.h"
+#include "ipc/ipc_message.h"
 
 namespace IPC {
-		
+	
+namespace internal {
+
 ChannelReader::ChannelReader(Listener* listener)
 	: listener_(listener),
 	  max_input_buffer_size_(Channel::kMaximumReadBufferSize),
@@ -17,11 +19,37 @@ ChannelReader::~ChannelReader()
 {
 }
 
+ChannelReader::DispatchState ChannelReader::ProcessIncomingMessages()
+{
+    while (true) 
+    {
+        int bytes_read = 0;
+        ReadState read_state = ReadData(input_buf_, Channel::kReadBufferSize, &bytes_read);
+        if (read_state == READ_FAILED)
+            return DISPATCH_ERROR;
+        if (read_state == READ_PENDING)
+            return DISPATCH_FINISHED;
+
+        if (!TranslateInputData(input_buf_, bytes_read))
+            return DISPATCH_ERROR;
+
+        DispatchState state = DispatchMessages();
+        if (state != DISPATCH_FINISHED)
+            return state;
+    }
+}
+
+ChannelReader::DispatchState ChannelReader::AsyncReadComplete(int bytes_read)
+{
+    if (!TranslateInputData(input_buf_, bytes_read))
+        return DISPATCH_ERROR;
+
+    return DispatchMessages();
+}
 
 void ChannelReader::InputData(const char* data, int data_len)
 {
-	input_overflow_buf_.append(data, data_len);
-	TranslateInputData();
+	TranslateInputData(data, data_len);
 	DispatchMessages();
 }
 
@@ -39,20 +67,35 @@ bool ChannelReader::GetHelloMessage(Message* message)
 
 bool ChannelReader::IsInternalMessage(const Message& msg)
 {
+    return msg.routing_id() == MSG_ROUTING_NONE && 
+        msg.type() == Channel::HELLO_MESSAGE_TYPE;
+}
+
+bool ChannelReader::IsHelloMessage(const Message& msg)
+{
 	return msg.routing_id() == MSG_ROUTING_NONE && 
 		   msg.type() == Channel::HELLO_MESSAGE_TYPE;
 }
 
-bool ChannelReader::TranslateInputData()
+bool ChannelReader::TranslateInputData(const char* input_data, int input_data_len)
 {
-	if (input_overflow_buf_.empty())
-		return false;
+    const char* p;
+    const char* end;
 
-	if (!CheckMessageSize(input_overflow_buf_.size()))
-		return false;
-	
-	const char* p   = input_overflow_buf_.data();
-	const char* end = p + input_overflow_buf_.size();
+    if (input_overflow_buf_.empty()) 
+    {
+        p = input_data;
+        end = input_data + input_data_len;
+    } 
+    else 
+    {
+        if (!CheckMessageSize(input_overflow_buf_.size() + input_data_len))
+            return false;
+
+        input_overflow_buf_.append(input_data, input_data_len);
+        p = input_overflow_buf_.data();
+        end = p + input_overflow_buf_.size();
+    }
 
 	size_t next_message_size = 0;
 
@@ -120,25 +163,27 @@ bool ChannelReader::HandleTranslatedMessage(Message* translated_message)
 		return true;
 	}
 
-	Message *m = new Message(*translated_message);
-	queued_messages_.push_back(m);
+    translated_message->set_sender_pid(GetSenderPID());
+
+	std::unique_ptr<Message> m(new Message(*translated_message));
+	queued_messages_.push_back(m.release());
 	return true;
 }
 
 void ChannelReader::DispatchMessage(Message* msg)
 {
 	listener_->OnMessageReceived(*msg);
-	delete msg;
 }
 
-void ChannelReader::DispatchMessages()
+ChannelReader::DispatchState ChannelReader::DispatchMessages()
 {
 	while (!queued_messages_.empty())
 	{
 		Message *m = queued_messages_.front();
-		queued_messages_.erase(queued_messages_.begin());
 		DispatchMessage(m);
+        queued_messages_.erase(queued_messages_.begin());
 	}
+    return DISPATCH_FINISHED;
 }
 
 bool ChannelReader::CheckMessageSize(size_t size)
@@ -151,6 +196,8 @@ bool ChannelReader::CheckMessageSize(size_t size)
 }
 
 
-}
+}  // namespace internal
+
+} // namespace IPC
 
 

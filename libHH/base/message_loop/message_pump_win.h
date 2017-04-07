@@ -13,9 +13,7 @@
 
 namespace base {
 
-// MessagePumpWin serves as the base for specialized versions of the MessagePump
-// for Windows. It provides basic functionality like handling of observers and
-// controlling the lifetime of the message pump.
+
 class BASE_EXPORT MessagePumpWin : public MessagePump {
  public:
   MessagePumpWin();
@@ -63,108 +61,75 @@ class BASE_EXPORT MessagePumpWin : public MessagePump {
 // deal with Windows mesagges, and instead has a Run loop based on Completion
 // Ports so it is better suited for IO operations.
 //
-class BASE_EXPORT MessagePumpForIO : public MessagePumpWin {
- public:
-  struct BASE_EXPORT IOContext {
-    IOContext();
-    OVERLAPPED overlapped;
-  };
+class BASE_EXPORT MessagePumpForIO : public MessagePumpWin 
+{
+public:
+    struct BASE_EXPORT IOContext
+    {
+        IOContext();
+        OVERLAPPED overlapped;
+    };
 
-  // Clients interested in receiving OS notifications when asynchronous IO
-  // operations complete should implement this interface and register themselves
-  // with the message pump.
-  //
-  // Typical use #1:
-  //   class MyFile : public IOHandler {
-  //     MyFile() {
-  //       ...
-  //       message_pump->RegisterIOHandler(file_, this);
-  //     }
-  //     // Plus some code to make sure that this destructor is not called
-  //     // while there are pending IO operations.
-  //     ~MyFile() {
-  //     }
-  //     virtual void OnIOCompleted(IOContext* context, DWORD bytes_transfered,
-  //                                DWORD error) {
-  //       ...
-  //       delete context;
-  //     }
-  //     void DoSomeIo() {
-  //       ...
-  //       IOContext* context = new IOContext;
-  //       ReadFile(file_, buffer, num_bytes, &read, &context);
-  //     }
-  //     HANDLE file_;
-  //   };
-  //
-  // Typical use #2:
-  // Same as the previous example, except that in order to deal with the
-  // requirement stated for the destructor, the class calls WaitForIOCompletion
-  // from the destructor to block until all IO finishes.
-  //     ~MyFile() {
-  //       while(pending_)
-  //         message_pump->WaitForIOCompletion(INFINITE, this);
-  //     }
-  //
-  class IOHandler {
-   public:
-    virtual ~IOHandler() {}
-    // This will be called once the pending IO operation associated with
-    // |context| completes. |error| is the Win32 error code of the IO operation
-    // (ERROR_SUCCESS if there was no error). |bytes_transfered| will be zero
-    // on error.
-    virtual void OnIOCompleted(IOContext* context, DWORD bytes_transfered,
-                               DWORD error) = 0;
-  };
+    class IOHandler 
+    {
+    public:
+        virtual ~IOHandler() {}
+        // This will be called once the pending IO operation associated with
+        // |context| completes. |error| is the Win32 error code of the IO operation
+        // (ERROR_SUCCESS if there was no error). |bytes_transfered| will be zero
+        // on error.
+        virtual void OnIOCompleted(IOContext* context, DWORD bytes_transfered,
+            DWORD error) = 0;
+    };
 
-  MessagePumpForIO();
-  ~MessagePumpForIO();
+    MessagePumpForIO();
+    ~MessagePumpForIO();
 
-  // MessagePump methods:
-  void ScheduleWork() override;
-  void ScheduleDelayedWork(const TimeTicks& delayed_work_time) override;
+    // MessagePump methods:
+    void ScheduleWork() override;
+    void ScheduleDelayedWork(const TimeTicks& delayed_work_time) override;
 
-  // Register the handler to be used when asynchronous IO for the given file
-  // completes. The registration persists as long as |file_handle| is valid, so
-  // |handler| must be valid as long as there is pending IO for the given file.
-  void RegisterIOHandler(HANDLE file_handle, IOHandler* handler);
+    // Register the handler to be used when asynchronous IO for the given file
+    // completes. The registration persists as long as |file_handle| is valid, so
+    // |handler| must be valid as long as there is pending IO for the given file.
+    void RegisterIOHandler(HANDLE file_handle, IOHandler* handler);
 
-  // Register the handler to be used to process job events. The registration
-  // persists as long as the job object is live, so |handler| must be valid
-  // until the job object is destroyed. Returns true if the registration
-  // succeeded, and false otherwise.
-  bool RegisterJobObject(HANDLE job_handle, IOHandler* handler);
+    // Register the handler to be used to process job events. The registration
+    // persists as long as the job object is live, so |handler| must be valid
+    // until the job object is destroyed. Returns true if the registration
+    // succeeded, and false otherwise.
+    bool RegisterJobObject(HANDLE job_handle, IOHandler* handler);
 
-  // Waits for the next IO completion that should be processed by |filter|, for
-  // up to |timeout| milliseconds. Return true if any IO operation completed,
-  // regardless of the involved handler, and false if the timeout expired. If
-  // the completion port received any message and the involved IO handler
-  // matches |filter|, the callback is called before returning from this code;
-  // if the handler is not the one that we are looking for, the callback will
-  // be postponed for another time, so reentrancy problems can be avoided.
-  // External use of this method should be reserved for the rare case when the
-  // caller is willing to allow pausing regular task dispatching on this thread.
-  bool WaitForIOCompletion(DWORD timeout, IOHandler* filter);
+    // Waits for the next IO completion that should be processed by |filter|, for
+    // up to |timeout| milliseconds. Return true if any IO operation completed,
+    // regardless of the involved handler, and false if the timeout expired. If
+    // the completion port received any message and the involved IO handler
+    // matches |filter|, the callback is called before returning from this code;
+    // if the handler is not the one that we are looking for, the callback will
+    // be postponed for another time, so reentrancy problems can be avoided.
+    // External use of this method should be reserved for the rare case when the
+    // caller is willing to allow pausing regular task dispatching on this thread.
+    bool WaitForIOCompletion(DWORD timeout, IOHandler* filter);
 
- private:
-  struct IOItem {
-    IOHandler* handler;
-    IOContext* context;
-    DWORD bytes_transfered;
-    DWORD error;
-  };
+private:
+    struct IOItem {
+        IOHandler* handler;
+        IOContext* context;
+        DWORD bytes_transfered;
+        DWORD error;
+    };
 
-  void DoRunLoop();
-  void WaitForWork();
-  bool MatchCompletedIOItem(IOHandler* filter, IOItem* item);
-  bool GetIOItem(DWORD timeout, IOItem* item);
-  bool ProcessInternalIOItem(const IOItem& item);
+    void DoRunLoop();
+    void WaitForWork();
+    bool MatchCompletedIOItem(IOHandler* filter, IOItem* item);
+    bool GetIOItem(DWORD timeout, IOItem* item);
+    bool ProcessInternalIOItem(const IOItem& item);
 
-  // The completion port associated with this thread.
-  win::ScopedHandle port_;
-  // This list will be empty almost always. It stores IO completions that have
-  // not been delivered yet because somebody was doing cleanup.
-  std::list<IOItem> completed_io_;
+    // The completion port associated with this thread.
+    win::ScopedHandle port_;
+    // This list will be empty almost always. It stores IO completions that have
+    // not been delivered yet because somebody was doing cleanup.
+    std::list<IOItem> completed_io_;
 };
 
 }  // namespace base

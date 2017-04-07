@@ -43,6 +43,10 @@ class GenericScopedHandle {
       auto last_error = ::GetLastError();
       Close();
 
+      if (Traits::IsHandleValid(handle)) {
+          handle_ = handle;
+      }
+
       ::SetLastError(last_error);
     }
   }

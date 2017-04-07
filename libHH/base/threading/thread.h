@@ -13,7 +13,13 @@ class BASE_EXPORT Thread : private QThread
 //	Q_OBJECT
 
 public:
-	Thread(QObject *parent = 0);
+    enum ID {
+        UI,
+        IO,
+        ID_COUNT
+    };
+
+	Thread(ID id);
 	~Thread();
 
 public:
@@ -24,22 +30,14 @@ public:
 	
 	bool IsRunning() const;
 
-	// Returns the message loop for this thread.  Use the MessageLoop's
-	// PostTask methods to execute code on the thread.  This only returns
-	// non-null after a successful call to Start.  After Stop has been called,
-	// this will return nullptr.
-	//
-	// NOTE: You must not call this MessageLoop's Quit method directly.  Use
-	// the Thread's Stop method instead.
+    // 调用Start成功,MessageLoop有效，调用Stop，MessageLoop被销毁
+    // 不能直接调用MessageLoop的Quit方法，应该调用线程的Stop方法
+    // 不应该持有MessageLoop对象，
+    // 应该持有具有引用计数的SingleThreadTaskRunner对象。
 	MessageLoop* message_loop() const {
 		return message_loop_; 
 	}
 
-	// Returns a TaskRunner for this thread. Use the TaskRunner's PostTask
-	// methods to execute code on the thread. Returns nullptr if the thread is not
-	// running (e.g. before Start or after Stop have been called). Callers can
-	// hold on to this even after the thread is gone; in this situation, attempts
-	// to PostTask() will fail.
 	scoped_refptr<SingleThreadTaskRunner> task_runner() const {
 		return message_loop_ ? message_loop_->task_runner() : nullptr; 
 	}
@@ -52,6 +50,9 @@ private:
 	// The thread's message loop.  Valid only while the thread is alive.
 	MessageLoop* message_loop_;
 
+    ID id_;
+
+    MessageLoop::Type message_loop_type_;
 };
 
 

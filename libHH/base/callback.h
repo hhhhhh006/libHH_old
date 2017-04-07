@@ -3,8 +3,8 @@
 
 #include <functional>
 
-namespace base
-{
+
+namespace base {
 
 template <typename Sig>
 class Callback;
@@ -19,6 +19,14 @@ public:
 		polymorphic_invoke_ = func;
 	}
 
+    CallBack& operator=(const CallBack& c) {
+        if (this == &c)
+            return *this;
+
+        polymorphic_invoke_ = c.polymorphic_invoke_;
+        return *this;
+    }
+
 	void Run() const
 	{
 		polymorphic_invoke_();
@@ -28,8 +36,8 @@ private:
 	InvokeFuncStorage polymorphic_invoke_;
 };
 
-
 typedef CallBack<void(void)> Closure;
+
 
 }
 

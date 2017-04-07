@@ -3,9 +3,10 @@
 
 namespace content {
 
-RenderProcessHostImpl::RenderProcessHostImpl(const QString& channel_name, QObject *parent)
+RenderProcessHostImpl::RenderProcessHostImpl(const QString& channel_name,
+    const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner, QObject *parent)
 	: QObject(parent),
-	  RenderProcessHost(channel_name)
+	  RenderProcessHost(channel_name.toStdString(), ipc_task_runner)
 {
 	child_process_launcher_ = new ChildProcessLauncher(this, this);
 }

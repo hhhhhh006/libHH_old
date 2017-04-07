@@ -6,9 +6,11 @@
 #include "base/base_export.h"
 #include "base/pending_task.h"
 #include "base/memory/ref_counted.h"
+#include "base/threading/thread_task_runner_handle.h"
 #include "base/message_loop/message_pump.h"
 #include "base/message_loop/incoming_task_queue.h"
 #include "base/message_loop/message_loop_task_runner.h"
+#include "base/message_loop/message_pump_win.h"
 
 namespace base
 {
@@ -106,8 +108,14 @@ private:
 	// be called on the message loop.
 	static std::unique_ptr<MessageLoop> CreateUnbound(Type type);
 
+    void Init();
+
 	// Configure various members and bind this message loop to the current thread.
 	void BindToCurrentThread();
+
+    // Sets the ThreadTaskRunnerHandle for the current thread to point to the
+    // task runner for this message loop.
+    void SetThreadTaskRunnerHandle();
 
 	// Calls RunTask or queues the pending_task on the deferred task list if it
 	// cannot be run right now.  Returns true if the task was run.
@@ -165,6 +173,9 @@ private:
 	// The task runner associated with this message loop.
 	scoped_refptr<SingleThreadTaskRunner> task_runner_;
 
+   
+    ThreadTaskRunnerHandle *thread_task_runner_handle_;
+
 
 	DISALLOW_COPY_AND_ASSIGN(MessageLoop);
 };
@@ -184,6 +195,39 @@ public:
 		MessageLoop *loop = MessageLoop::current();
 		return loop && loop->type() == MessageLoop::TYPE_UI;
 	}
+
+};
+
+//-----------------------------------------------------------------------------
+// MessageLoopForIO extends MessageLoop with methods that are particular to a
+// MessageLoop instantiated with TYPE_IO.
+//
+// This class is typically used like so:
+//   MessageLoopForIO::current()->...call some method...
+//
+class BASE_EXPORT MessageLoopForIO : public MessageLoop 
+{
+public:
+    MessageLoopForIO() : MessageLoop(TYPE_IO) {}
+
+    // Returns the MessageLoopForIO of the current thread.
+    static MessageLoopForIO* current() {
+        MessageLoop* loop = MessageLoop::current();
+        return static_cast<MessageLoopForIO*>(loop);
+    }
+
+    static bool IsCurrent() {
+        MessageLoop* loop = MessageLoop::current();
+        return loop && loop->type() == MessageLoop::TYPE_IO;
+    }
+
+    typedef MessagePumpForIO::IOHandler IOHandler;
+    typedef MessagePumpForIO::IOContext IOContext;
+
+    // Please see MessagePumpWin for definitions of these methods.
+    void RegisterIOHandler(HANDLE file, IOHandler* handler);
+    bool RegisterJobObject(HANDLE job, IOHandler* handler);
+    bool WaitForIOCompletion(DWORD timeout, IOHandler* filter);
 
 };
 

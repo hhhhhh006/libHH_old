@@ -1,19 +1,20 @@
 #include "render_process_host.h"
 
-#include "IPC/ipc_channel.h"
-#include "IPC/ipc_message.h"
+#include "ipc/ipc_channel.h"
+#include "ipc/ipc_message.h"
 
 namespace content {
 
 
-RenderProcessHost::RenderProcessHost(const QString& channel_name)
+RenderProcessHost::RenderProcessHost(const IPC::ChannelHandle& channel_handle,
+    const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner)
 {
-	channel_ = IPC::Channel::CreateServer(channel_name, this);
+	channel_ = IPC::ChannelProxy::Create(channel_handle, IPC::Channel::MODE_SERVER, this, ipc_task_runner);
 }
 
 RenderProcessHost::~RenderProcessHost()
 {
-	delete channel_;
+	
 }
 
 

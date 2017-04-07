@@ -1,23 +1,23 @@
 #include "render_process.h"
 
-#include "IPC/ipc_channel.h"
-#include "IPC/ipc_message.h"
-
 #include <Windows.h>
+
+#include "ipc/ipc_channel.h"
+#include "ipc/ipc_message.h"
 
 
 namespace content {
 
 
-RenderProcess::RenderProcess(const QString& channel_name)
+RenderProcess::RenderProcess(const IPC::ChannelHandle& channel_handle,
+    const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner)
 {
-	channel_ = IPC::Channel::CreateClient(channel_name, this);
-	channel_->Connect();
+	channel_ = IPC::ChannelProxy::Create(channel_handle, IPC::Channel::MODE_CLIENT, this, ipc_task_runner);
 }
 
 RenderProcess::~RenderProcess()
 {
-	delete channel_;
+	
 }
 
 
@@ -33,11 +33,7 @@ bool RenderProcess::OnMessageReceived(const IPC::Message& message)
 
 void RenderProcess::OnChannelConnected(int32_t peer_pid)
 {
-	int32_t pid = ::GetCurrentProcessId();
-
-	IPC::Message msg(MSG_ROUTING_NONE, IPC::Channel::HELLO_MESSAGE_TYPE);
-	msg.WriteInt32(pid);
-	Send(&msg);
+	
 }
 
 

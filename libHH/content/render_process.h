@@ -1,6 +1,8 @@
 #ifndef RENDER_PROCESS_H
 #define RENDER_PROCESS_H
 
+#include "base/single_thread_task_runner.h"
+#include "ipc/ipc_channel_proxy.h"
 #include "content/content_export.h"
 #include "content/process_impl.h"
 
@@ -14,7 +16,8 @@ class CONTENT_EXPORT RenderProcess : public ProcessImpl
 {
 
 public:
-	RenderProcess(const QString& channel_name);
+	RenderProcess(const IPC::ChannelHandle& channel_handle,
+        const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner);
 	virtual ~RenderProcess();
 
 public:
@@ -23,7 +26,7 @@ public:
 	virtual void OnChannelConnected(int32_t peer_pid);
 
 protected:
-	IPC::Channel* channel_;
+	std::unique_ptr<IPC::ChannelProxy> channel_;
 };
 
 

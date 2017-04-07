@@ -1,16 +1,18 @@
 #include "ChildWidget.h"
+
 #include "content/render_process.h"
-#include "IPC/ipc_message_macros.h"
+#include "ipc/ipc_message_macros.h"
 #include "message_define.h"
 
 #include <stdint.h>
 
-ChildWidget::ChildWidget(QWidget *parent)
+ChildWidget::ChildWidget(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner,
+    const QString &pipe_name, QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
 
-	process_ = new content::RenderProcess("testipc");
+	process_ = new content::RenderProcess(pipe_name.toStdString(), ipc_task_runner);
 	process_->AddFilter(this);
 
 	layout()->setMargin(0);

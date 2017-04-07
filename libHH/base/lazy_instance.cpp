@@ -29,6 +29,9 @@ bool NeedsLazyInstance(subtle::AtomicWord* state) {
   // state_ == STATE_CREATED needs to acquire visibility over
   // the associated data (buf_). Pairing Release_Store is in
   // CompleteLazyInstance().
+  
+  // QThread::yieldCurrentThread 实际调用的是 Sleep(0)
+  // 让出当前的线程执行权
   while (subtle::Acquire_Load(state) == kLazyInstanceStateCreating) {
     QThread::yieldCurrentThread();
   }

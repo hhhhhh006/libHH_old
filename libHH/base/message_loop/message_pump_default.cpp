@@ -16,6 +16,10 @@ MessagePumpDefault::~MessagePumpDefault()
 
 void MessagePumpDefault::Run(Delegate* delegate)
 {
+    // 如果DoWork返回true，表示完成了工作，继续调用DoDelayedWork，不会调用DoIdleWork
+    // 
+    // 如果DoDelayedWork返回true，表示完成了工作，不会调用DoIdleWork
+
 	for (;;)
 	{
 		bool did_work = delegate->DoWork();

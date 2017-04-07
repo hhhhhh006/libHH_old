@@ -4,8 +4,7 @@
 #include <stdint.h>
 #include <QDateTime>
 
-namespace base
-{
+namespace base {
 
 typedef int64_t TimeTicks;
 typedef int64_t TimeDelta;

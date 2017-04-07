@@ -4,8 +4,7 @@
 #include "base/base_export.h"
 #include "base/task_runner.h"
 
-namespace base
-{
+namespace base {
 
 class BASE_EXPORT SingleThreadTaskRunner : public TaskRunner
 {

@@ -1,6 +1,7 @@
 #include "message_loop.h"
 
 #include "base/lazy_instance.h"
+#include "base/memory/ptr_util.h"
 #include "base/threading/thread_local.h"
 #include "base/message_loop/incoming_task_queue.h"
 #include "base/message_loop/message_pump_default.h"
@@ -14,6 +15,10 @@ namespace {
 // loop, if one exists.  This should be safe and free of static constructors.
 LazyInstance<base::ThreadLocalPointer<MessageLoop> >::Leaky lazy_tls_ptr = LAZY_INSTANCE_INITIALIZER;
 
+MessagePumpForIO* ToPumpIO(MessagePump* pump) {
+    return static_cast<MessagePumpForIO*>(pump);
+}
+
 }
 
 
@@ -25,12 +30,16 @@ MessageLoop::MessageLoop(Type type /*= TYPE_DEFAULT*/)
 	  recent_time_(0),
 	  nestable_tasks_allowed_(true)
 {
-	incoming_task_queue_ = new internal::IncomingTaskQueue(this);
-	unbound_task_runner_ = new internal::MessageLoopTaskRunner(incoming_task_queue_);
-	task_runner_ = unbound_task_runner_;
+	Init();
 	BindToCurrentThread();
 }
 
+void MessageLoop::Init()
+{
+    incoming_task_queue_ = new internal::IncomingTaskQueue(this);
+    unbound_task_runner_ = new internal::MessageLoopTaskRunner(incoming_task_queue_);
+    task_runner_ = unbound_task_runner_;
+}
 
 MessageLoop::~MessageLoop()
 {
@@ -62,9 +71,11 @@ MessageLoop* MessageLoop::current()
 std::unique_ptr<MessagePump> MessageLoop::CreateMessagePumpForType(Type type)
 {
 	if (type == TYPE_UI)
-		return std::unique_ptr<MessagePump>(new MessagePumpForUI());
+		return base::WrapUnique(new MessagePumpForUI());
+    else if (type == TYPE_IO)
+        return base::WrapUnique(new MessagePumpForIO());
 
-	return std::unique_ptr<MessagePump>(new MessagePumpDefault());;
+	return base::WrapUnique(new MessagePumpDefault());;
 }
 
 void MessageLoop::PostTask(const Closure& task)
@@ -141,13 +152,21 @@ void MessageLoop::BindToCurrentThread()
 	incoming_task_queue_->StartScheduling();
 	unbound_task_runner_->BindToCurrentThread();
 	unbound_task_runner_ = nullptr;
+
+    SetThreadTaskRunnerHandle();
 }
 
+
+void MessageLoop::SetThreadTaskRunnerHandle()
+{
+    thread_task_runner_handle_ = new ThreadTaskRunnerHandle(task_runner_);
+}
 
 std::unique_ptr<MessageLoop> MessageLoop::CreateUnbound(Type type)
 {
 	return std::unique_ptr<MessageLoop>(new MessageLoop(type, 1));
 }
+
 
 MessageLoop::MessageLoop(Type type, int shadow)
 	: type_(type),
@@ -157,9 +176,7 @@ MessageLoop::MessageLoop(Type type, int shadow)
 	  recent_time_(0),
 	  nestable_tasks_allowed_(true)
 {
-	incoming_task_queue_ = new internal::IncomingTaskQueue(this);
-	unbound_task_runner_ = new internal::MessageLoopTaskRunner(incoming_task_queue_);
-	task_runner_ = unbound_task_runner_;
+	Init();
 }
 
 
@@ -282,6 +299,23 @@ bool MessageLoop::DoIdleWork()
 		pump_->Quit();
 
 	return false;
+}
+
+
+//MessageLoopForIO methods
+void MessageLoopForIO::RegisterIOHandler(HANDLE file, IOHandler* handler)
+{
+    return ToPumpIO(pump_.get())->RegisterIOHandler(file, handler);
+}
+
+bool MessageLoopForIO::RegisterJobObject(HANDLE job, IOHandler* handler)
+{
+    return ToPumpIO(pump_.get())->RegisterJobObject(job, handler);
+}
+
+bool MessageLoopForIO::WaitForIOCompletion(DWORD timeout, IOHandler* filter)
+{
+    return ToPumpIO(pump_.get())->WaitForIOCompletion(timeout, filter);
 }
 
 

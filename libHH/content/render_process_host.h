@@ -1,6 +1,8 @@
 #ifndef RENDER_PROCESS_HOST_H
 #define RENDER_PROCESS_HOST_H
 
+#include "base/single_thread_task_runner.h"
+#include "ipc/ipc_channel_proxy.h"
 #include "content/content_export.h"
 #include "content/process_impl.h"
 
@@ -12,9 +14,9 @@ namespace content {
 
 class CONTENT_EXPORT RenderProcessHost : public ProcessImpl
 {
-
 public:
-	RenderProcessHost(const QString& channel_name);
+	RenderProcessHost(const IPC::ChannelHandle& channel_handle, 
+        const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner);
 	virtual ~RenderProcessHost();
 
 public:
@@ -23,7 +25,7 @@ public:
 	virtual void OnChannelConnected(int32_t peer_pid);
 
 protected:
-	IPC::Channel* channel_;
+	std::unique_ptr<IPC::ChannelProxy> channel_;
 };
 
 }

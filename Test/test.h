@@ -5,6 +5,9 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_test.h"
 
+#include "base/single_thread_task_runner.h"
+#include "base/memory/ref_counted.h"
+
 namespace content{
 	class RenderProcessHostImpl;
 }
@@ -17,7 +20,7 @@ class Test : public QMainWindow
 	Q_OBJECT
 
 public:
-	Test(QWidget *parent = 0);
+	Test(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner, QWidget *parent = 0);
 	~Test();
 
 public slots:
@@ -31,9 +34,11 @@ private:
 
 	content::RenderProcessHostImpl* process_host_;
 
-	base::Thread* thread_;
+	scoped_refptr<base::SingleThreadTaskRunner> ipc_task_runner_;
 
 	int index_;
+
+    QList<content::RenderProcessHostImpl*> process_host_list_;
 };
 
 #endif // TEST_H

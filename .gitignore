@@ -30,6 +30,7 @@
 *.sdf
 *.suo
 *.user
+*.opensdf
 
 # Dir
 win32/
