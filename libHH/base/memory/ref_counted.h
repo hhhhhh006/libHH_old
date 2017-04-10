@@ -2,6 +2,7 @@
 #define REF_COUNTED_H
 
 #include <cassert>
+#include <iosfwd>
 
 #include "base/base_export.h"
 #include "base/macros.h"
