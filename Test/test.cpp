@@ -18,6 +18,7 @@
 #include "base/Threading/thread.h"
 #include "render_process_host_impl.h"
 
+base::ThreadLocalBoolean g_local_bool_;
 
 Test::Test(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner, QWidget *parent)
 	: QMainWindow(parent),

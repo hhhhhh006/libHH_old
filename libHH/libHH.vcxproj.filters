@@ -119,9 +119,6 @@
     <ClCompile Include="base\threading\thread.cpp">
       <Filter>base\threading</Filter>
     </ClCompile>
-    <ClCompile Include="base\threading\thread_local.cpp">
-      <Filter>base\threading</Filter>
-    </ClCompile>
     <ClCompile Include="ipc\ipc_channel.cpp">
       <Filter>ipc</Filter>
     </ClCompile>
@@ -188,9 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libhh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="libhh_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Content\render_process_host.h">

@@ -3,10 +3,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "Base/macros.h"
-#include "ipc_message_macros.h"
-#include "ipc_message_utils.h"
-#include "message_filter.h"
+#include <algorithm>
+
+#include "base/macros.h"
+#include "ipc/ipc_message_macros.h"
+#include "ipc/ipc_message_utils.h"
+#include "ipc/message_filter.h"
 
 
 namespace IPC {
@@ -27,7 +29,8 @@ bool TryFiltersImpl(MessageFilterRouter::MessageFilters& filters, const IPC::Mes
 
 bool RemoveFilterImpl(MessageFilterRouter::MessageFilters& filters, MessageFilter* filter) 
 {
-	MessageFilterRouter::MessageFilters::iterator it = std::remove(filters.begin(), filters.end(), filter);
+	MessageFilterRouter::MessageFilters::iterator it = 
+        std::remove(filters.begin(), filters.end(), filter);
 	if (it == filters.end())
 		return false;
 

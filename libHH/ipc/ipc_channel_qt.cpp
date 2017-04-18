@@ -7,6 +7,7 @@
 #include "base/memory/ptr_util.h"
 #include "ipc/ipc_message.h"
 #include "ipc/ipc_listener.h"
+#include "build/build_config.h"
 
 
 namespace IPC{
@@ -200,7 +201,7 @@ void ChannelClient::OnConnected()
 }
 
 
-#ifdef OS_WIN
+#ifndef OS_WIN
 
 // Channel's static methods
 std::unique_ptr<Channel> Channel::Create(const ChannelHandle& channel_handle, Mode mode, Listener* listener)

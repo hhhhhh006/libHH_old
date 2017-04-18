@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include <memory>
+
 #include "ipc/ipc_sender.h"
 #include "ipc/ipc_message.h"
 

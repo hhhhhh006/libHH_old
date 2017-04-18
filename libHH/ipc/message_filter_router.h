@@ -1,13 +1,9 @@
-// Copyright 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 #ifndef IPC_MESSAGE_FILTER_ROUTER_H_
 #define IPC_MESSAGE_FILTER_ROUTER_H_
 
 #include <vector>
 
-#include "IPC/ipc_message_start.h"
+#include "ipc/ipc_message_start.h"
 
 
 namespace IPC {
