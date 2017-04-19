@@ -55,6 +55,8 @@ MessageLoop::~MessageLoop()
 			break;
 	}
 
+    thread_task_runner_handle_.reset();
+
 	incoming_task_queue_->WillDestroyCurrentMessageLoop();
 	incoming_task_queue_ = nullptr;
 	unbound_task_runner_ = nullptr;
@@ -160,7 +162,8 @@ void MessageLoop::BindToCurrentThread()
 
 void MessageLoop::SetThreadTaskRunnerHandle()
 {
-    thread_task_runner_handle_ = new ThreadTaskRunnerHandle(task_runner_);
+    thread_task_runner_handle_.reset();
+    thread_task_runner_handle_.reset(new ThreadTaskRunnerHandle(task_runner_));
 }
 
 std::unique_ptr<MessageLoop> MessageLoop::CreateUnbound(Type type)

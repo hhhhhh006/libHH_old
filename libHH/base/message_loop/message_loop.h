@@ -174,7 +174,7 @@ private:
 	scoped_refptr<SingleThreadTaskRunner> task_runner_;
 
    
-    ThreadTaskRunnerHandle *thread_task_runner_handle_;
+    std::unique_ptr<ThreadTaskRunnerHandle> thread_task_runner_handle_;
 
 
 	DISALLOW_COPY_AND_ASSIGN(MessageLoop);

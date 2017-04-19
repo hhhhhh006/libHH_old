@@ -210,7 +210,8 @@ private:
     }
 
 	// Writes a POD by copying its bytes.
-	template <typename T> bool WritePOD(const T& data) {
+	template <typename T> 
+    bool WritePOD(const T& data) {
 		WriteBytesStatic<sizeof(data)>(&data);
 		return true;
 	}
