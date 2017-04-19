@@ -5,6 +5,7 @@
 #include <string>
 
 #include "base/base_export.h"
+#include "base/compiler_specific.h"
 
 namespace base {
 
@@ -203,7 +204,10 @@ private:
 	size_t write_offset_;
 
 	// Just like WriteBytes, but with a compile-time size, for performance.
-	template<size_t length> void WriteBytesStatic(const void* data);
+	template<size_t length>
+    void BASE_EXPORT WriteBytesStatic(const void* data) {
+        WriteBytesCommon(data, length);
+    }
 
 	// Writes a POD by copying its bytes.
 	template <typename T> bool WritePOD(const T& data) {

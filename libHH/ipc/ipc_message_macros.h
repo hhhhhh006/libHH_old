@@ -7,9 +7,9 @@
 #include <stdint.h>
 #include <tuple>
 
-#include "ipc_message_utils.h"
-#include "param_traits_macros.h"
-#include "message_dispatch.h"
+#include "ipc/ipc_message_utils.h"
+#include "ipc/param_traits_macros.h"
+#include "ipc/message_dispatch.h"
 
 #if defined(IPC_MESSAGE_IMPL)
 #include "ipc_message_utils_impl.h"

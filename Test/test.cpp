@@ -7,9 +7,8 @@
 
 
 #include "ChildWidget.h"
-#include "message_define.h"
 #include "logdata.h"
-#include "message_traits.h"
+#include "message_define.h"
 
 #include "base/callback.h"
 #include "base/lazy_instance.h"

@@ -1,10 +1,11 @@
 #include "ChildWidget.h"
 
+#include <stdint.h>
+
 #include "content/render_process.h"
 #include "ipc/ipc_message_macros.h"
 #include "message_define.h"
 
-#include <stdint.h>
 
 ChildWidget::ChildWidget(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner,
     const QString &pipe_name, QWidget *parent)

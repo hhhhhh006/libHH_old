@@ -1,9 +1,11 @@
-#include "IPC/ipc_message_macros.h"
-#include "IPC/ipc_message_start.h"
-#include "IPC/param_traits_macros.h"
+#ifndef message_define_h__
+#define message_define_h__
+
+#include "ipc/ipc_message_macros.h"
+#include "ipc/ipc_message_start.h"
+
 
 #include "logdata.h"
-#include "message_traits.h"
 
 #define IPC_MESSAGE_START TestMsgStart
 
@@ -27,3 +29,5 @@ IPC_MESSAGE_CONTROL2(TestMsg_Hello, int, int)
 IPC_MESSAGE_CONTROL1(TestMsg_Log, Logdata)
 
 IPC_MESSAGE_CONTROL1(TestMsg_Live, Loglive)
+
+#endif // message_define_h__

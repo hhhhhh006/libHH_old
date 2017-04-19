@@ -1,4 +1,5 @@
 #include "base/pickle.h"
+
 #include "base/bits.h"
 
 namespace base {
@@ -362,13 +363,15 @@ void Pickle::Reserve(size_t additional_capacity)
 		Resize(capacity_after_header_ * 2 + new_size);
 }
 
-template <size_t length> void Pickle::WriteBytesStatic(const void* data) {
-	WriteBytesCommon(data, length);
-}
+//好像不支持分离编译模式
+// template <size_t length> 
+// void Pickle::WriteBytesStatic(const void* data) {
+// 	WriteBytesCommon(data, length);
+// }
 
-template void Pickle::WriteBytesStatic<2>(const void* data);
-template void Pickle::WriteBytesStatic<4>(const void* data);
-template void Pickle::WriteBytesStatic<8>(const void* data);
+// template void Pickle::WriteBytesStatic<2>(const void* data);
+// template void Pickle::WriteBytesStatic<4>(const void* data);
+// template void Pickle::WriteBytesStatic<8>(const void* data);
 
 void* Pickle::ClaimUninitializedBytesInternal(size_t num_bytes)
 {
