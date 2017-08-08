@@ -25,12 +25,22 @@ bool RenderProcessHost::Send(IPC::Message* msg)
 
 bool RenderProcessHost::OnMessageReceived(const IPC::Message& message)
 {
-	return TryFilters(message);
+	return true;
 }
 
 void RenderProcessHost::OnChannelConnected(int32_t peer_pid)
 {
 
+}
+
+void RenderProcessHost::AddFilter(IPC::MessageFilter* filter)
+{
+    channel_->AddFilter(filter);
+}
+
+void RenderProcessHost::RemoveFilter(IPC::MessageFilter* filter)
+{
+    channel_->RemoveFilter(filter);
 }
 
 }

@@ -107,7 +107,7 @@ bool ChannelWin::ProcessMessageForDelivery(Message* message)
 
 void ChannelWin::FlushPrelimQueue() 
 {
-    // 处理管道没链接之前，缓存需要发送的Message
+    // 清空管道没连接之前，缓存发送的Message
     std::queue<Message*> prelim_queue;
     prelim_queue_.swap(prelim_queue);
 
@@ -138,7 +138,7 @@ base::ProcessId ChannelWin::GetPeerPID() const
 
 base::ProcessId ChannelWin::GetSelfPID() const 
 {
-    return GetCurrentProcessId();
+    return ::GetCurrentProcessId();
 }
 
 // static
@@ -249,7 +249,7 @@ bool ChannelWin::CreatePipe(const IPC::ChannelHandle &channel_handle, Mode mode)
     // 发送 Hello Message 类型，里面携带了进程PID
     // 管道双方确认接收到 Hello Message 消息，才认为连接成功
     std::unique_ptr<Message> m(new Message(MSG_ROUTING_NONE, HELLO_MESSAGE_TYPE));
-    if (!m->WriteInt(GetCurrentProcessId())) 
+    if (!m->WriteInt(::GetCurrentProcessId())) 
     {
         pipe_.Close();
         return false;

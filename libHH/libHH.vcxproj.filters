@@ -83,9 +83,6 @@
     <ClCompile Include="Base\task_runner.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="Content\process_impl.cpp">
-      <Filter>content</Filter>
-    </ClCompile>
     <ClCompile Include="Content\render_process.cpp">
       <Filter>content</Filter>
     </ClCompile>
@@ -158,15 +155,6 @@
     <ClCompile Include="ipc\ipc_channel_win.cpp">
       <Filter>ipc</Filter>
     </ClCompile>
-    <ClCompile Include="ipc\ipc_channel_qt.cpp">
-      <Filter>ipc</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_qt.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_qt.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="base\memory\weak_ptr.cpp">
       <Filter>base\memory</Filter>
     </ClCompile>
@@ -213,9 +201,6 @@
     </ClInclude>
     <ClInclude Include="Base\time.h">
       <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="Content\process_impl.h">
-      <Filter>content</Filter>
     </ClInclude>
     <ClInclude Include="Base\atomicops.h">
       <Filter>base</Filter>
@@ -383,9 +368,6 @@
     </CustomBuild>
     <CustomBuild Include="Base\Threading\thread.h">
       <Filter>base\threading</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ipc\ipc_channel_qt.h">
-      <Filter>ipc</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

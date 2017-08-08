@@ -1,10 +1,7 @@
 #include "render_process.h"
 
-#include <Windows.h>
-
 #include "ipc/ipc_channel.h"
 #include "ipc/ipc_message.h"
-
 
 namespace content {
 
@@ -28,7 +25,7 @@ bool RenderProcess::Send(IPC::Message* msg)
 
 bool RenderProcess::OnMessageReceived(const IPC::Message& message)
 {
-	return TryFilters(message);
+	return true;
 }
 
 void RenderProcess::OnChannelConnected(int32_t peer_pid)
@@ -36,5 +33,14 @@ void RenderProcess::OnChannelConnected(int32_t peer_pid)
 	
 }
 
+void RenderProcess::AddFilter(IPC::MessageFilter* filter)
+{
+    channel_->AddFilter(filter);
+}
+
+void RenderProcess::RemoveFilter(IPC::MessageFilter* filter)
+{
+    channel_->RemoveFilter(filter);
+}
 
 }

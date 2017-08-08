@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+      //  Sleep(10000);
 		ChildWidget w(io_thread->task_runner(), pipe_name);
 		w.setWindowTitle("child");
 		w.show();

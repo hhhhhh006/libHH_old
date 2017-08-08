@@ -17,7 +17,8 @@ static const int kMsgHaveWork = WM_USER + 1;
 // MessagePumpWin public:
 
 MessagePumpWin::MessagePumpWin() : work_state_(READY),
-	state_(nullptr)
+	                               state_(nullptr),
+                                   delayed_work_time_(0)
 {
 
 }
@@ -143,8 +144,7 @@ void MessagePumpForIO::DoRunLoop()
         if (state_->should_quit)
             break;
 
-        more_work_is_plausible |=
-            state_->delegate->DoDelayedWork(&delayed_work_time_);
+        more_work_is_plausible |= state_->delegate->DoDelayedWork(&delayed_work_time_);
         if (state_->should_quit)
             break;
 
@@ -205,7 +205,7 @@ bool MessagePumpForIO::GetIOItem(DWORD timeout, IOItem* item)
     ULONG_PTR key = reinterpret_cast<ULONG_PTR>(nullptr);
     OVERLAPPED* overlapped = nullptr;
     if (!GetQueuedCompletionStatus(port_.Get(), &item->bytes_transfered, &key,
-        &overlapped, timeout)) 
+        &overlapped, timeout))
     {
         if (!overlapped)
             return false;  // Nothing in the queue.
@@ -234,7 +234,7 @@ bool MessagePumpForIO::ProcessInternalIOItem(const IOItem& item)
 bool MessagePumpForIO::MatchCompletedIOItem(IOHandler* filter, IOItem* item)
 {
     for (std::list<IOItem>::iterator it = completed_io_.begin();
-        it != completed_io_.end(); ++it)
+         it != completed_io_.end(); ++it)
     {
         if (!filter || it->handler == filter) 
         {

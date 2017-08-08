@@ -21,7 +21,7 @@ bool TryFiltersImpl(MessageFilterRouter::MessageFilters& filters, const IPC::Mes
 	{
 		if (filters[i]->OnMessageReceived(message)) 
 		{
-		//	return true;
+			return true;
 		}
 	}
 	return false;

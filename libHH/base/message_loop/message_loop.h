@@ -12,8 +12,8 @@
 #include "base/message_loop/message_loop_task_runner.h"
 #include "base/message_loop/message_pump_win.h"
 
-namespace base
-{
+namespace base{
+
 struct PendingTask;
 class SingleThreadTaskRunner;
 

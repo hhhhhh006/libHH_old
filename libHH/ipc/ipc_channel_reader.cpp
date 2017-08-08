@@ -8,8 +8,7 @@ namespace internal {
 
 ChannelReader::ChannelReader(Listener* listener)
 	: listener_(listener),
-	  max_input_buffer_size_(Channel::kMaximumReadBufferSize),
-	  hello_message_(nullptr)
+	  max_input_buffer_size_(Channel::kMaximumReadBufferSize)
 {
 	memset(input_buf_, 0, sizeof(input_buf_));
 }
@@ -47,23 +46,6 @@ ChannelReader::DispatchState ChannelReader::AsyncReadComplete(int bytes_read)
     return DispatchMessages();
 }
 
-void ChannelReader::InputData(const char* data, int data_len)
-{
-	TranslateInputData(data, data_len);
-	DispatchMessages();
-}
-
-bool ChannelReader::GetHelloMessage(Message* message)
-{
-	if (hello_message_)
-	{
-		*message = *hello_message_;
-		delete hello_message_;
-		hello_message_ = nullptr;
-		return true;
-	}
-	return false;
-}
 
 bool ChannelReader::IsInternalMessage(const Message& msg)
 {
@@ -158,7 +140,6 @@ bool ChannelReader::HandleTranslatedMessage(Message* translated_message)
 {
 	if (IsInternalMessage(*translated_message))
 	{
-		hello_message_ = new Message(*translated_message);
 		HandleInternalMessage(*translated_message);
 		return true;
 	}

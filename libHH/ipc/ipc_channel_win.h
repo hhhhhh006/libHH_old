@@ -23,7 +23,7 @@ class ChannelWin : public Channel,
 {
 public:
     ChannelWin(const IPC::ChannelHandle& channel_handle, Mode mode,
-        Listener* listener);
+               Listener* listener);
     ~ChannelWin();
 
     // Channel implementation

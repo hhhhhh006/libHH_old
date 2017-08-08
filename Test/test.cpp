@@ -34,7 +34,10 @@ Test::Test(const scoped_refptr<base::SingleThreadTaskRunner>& ipc_task_runner, Q
 
 Test::~Test()
 {
-	
+    for (int i = 0; i < process_host_list_.size(); i++)
+    {
+        delete process_host_list_[i];
+    }
 }
 
 
@@ -66,7 +69,7 @@ void Test::on_pushButton_clicked()
 
 	//	io_thread_->message_loop()->PostDelayedTask(cb, 1000*i);
 
-		base::MessageLoopForUI::current()->PostDelayedTask(cb, 1000*i);
+	//	base::MessageLoopForUI::current()->PostDelayedTask(cb, 1000*i);
 	}
 
 }

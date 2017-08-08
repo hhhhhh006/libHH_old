@@ -78,7 +78,7 @@ std::unique_ptr<MessagePump> MessageLoop::CreateMessagePumpForType(Type type)
     else if (type == TYPE_IO)
         return base::WrapUnique(new MessagePumpForIO());
 
-	return base::WrapUnique(new MessagePumpDefault());;
+	return base::WrapUnique(new MessagePumpDefault());
 }
 
 void MessageLoop::PostTask(const Closure& task)

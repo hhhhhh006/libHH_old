@@ -79,7 +79,7 @@ public:
         // (ERROR_SUCCESS if there was no error). |bytes_transfered| will be zero
         // on error.
         virtual void OnIOCompleted(IOContext* context, DWORD bytes_transfered,
-            DWORD error) = 0;
+                                   DWORD error) = 0;
     };
 
     MessagePumpForIO();

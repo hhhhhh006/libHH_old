@@ -48,10 +48,6 @@ public:
     // data. See ReadData for more.
     DispatchState AsyncReadComplete(int bytes_read);
 
-	void InputData(const char* data, int data_len);
-
-	bool GetHelloMessage(Message* message);
-
     bool IsInternalMessage(const Message& msg);
 
     bool IsHelloMessage(const Message& msg);
@@ -100,8 +96,6 @@ private:
 	size_t max_input_buffer_size_;
 
 	ScopedVector<Message> queued_messages_;
-
-	Message* hello_message_;
 
 };
 

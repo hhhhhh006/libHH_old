@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F772B532-90C4-4E65-88B5-FD411BA150DB}</ProjectGuid>
     <Keyword>Qt4VSv1.0</Keyword>
+    <ProjectName>libhh</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -44,8 +45,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;QT_NETWORK_LIB;LIBHH_LIB;_DEBUG;_WINDOWS;_USRDLL;COMPONENT_BUILD;BASE_IMPLEMENTATION;IPC_IMPLEMENTATION;CONTENT_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtNetwork;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;LIBHH_LIB;_DEBUG;_WINDOWS;_USRDLL;COMPONENT_BUILD;BASE_IMPLEMENTATION;IPC_IMPLEMENTATION;CONTENT_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -58,13 +59,13 @@
       <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Networkd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_NETWORK_LIB;LIBHH_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtNetwork;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;LIBHH_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -75,7 +76,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Network.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,25 +97,17 @@
     <ClCompile Include="base\threading\thread_task_runner_handle.cpp" />
     <ClCompile Include="base\win\scoped_handle.cpp" />
     <ClCompile Include="Content\child_process_launcher.cpp" />
-    <ClCompile Include="Content\process_impl.cpp" />
     <ClCompile Include="Content\render_process.cpp" />
     <ClCompile Include="Content\render_process_host.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_child_process_launcher.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ipc_channel_qt.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_child_process_launcher.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\message_loop\incoming_task_queue.cpp" />
-    <ClCompile Include="GeneratedFiles\Release\moc_ipc_channel_qt.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="ipc\ipc_channel.cpp" />
     <ClCompile Include="ipc\ipc_channel_proxy.cpp" />
-    <ClCompile Include="ipc\ipc_channel_qt.cpp" />
     <ClCompile Include="ipc\ipc_channel_reader.cpp" />
     <ClCompile Include="ipc\ipc_channel_win.cpp" />
     <ClCompile Include="ipc\ipc_message.cpp" />
@@ -175,7 +168,6 @@
     </CustomBuild>
     <ClInclude Include="base\synchronization\waitable_event.h" />
     <ClInclude Include="content\content_export.h" />
-    <ClInclude Include="Content\process_impl.h" />
     <ClInclude Include="Content\render_process.h" />
     <ClInclude Include="Content\render_process_host.h" />
     <ClInclude Include="base\message_loop\incoming_task_queue.h" />
@@ -208,25 +200,15 @@
     <ClInclude Include="base\message_loop\message_pump.h" />
     <ClInclude Include="base\message_loop\message_loop.h" />
     <ClInclude Include="base\message_loop\message_loop_task_runner.h" />
-    <CustomBuild Include="ipc\ipc_channel_qt.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ipc_channel_qt.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_DEBUG -D_WINDOWS -D_USRDLL -DCOMPONENT_BUILD -DBASE_IMPLEMENTATION -DIPC_IMPLEMENTATION -DCONTENT_IMPLEMENTATION -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ipc_channel_qt.h...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
-    </CustomBuild>
     <CustomBuild Include="Content\child_process_launcher.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing child_process_launcher.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_DEBUG -D_WINDOWS -D_USRDLL -DCOMPONENT_BUILD -DBASE_IMPLEMENTATION -DIPC_IMPLEMENTATION -DCONTENT_IMPLEMENTATION -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DLIBHH_LIB -D_DEBUG -D_WINDOWS -D_USRDLL -DCOMPONENT_BUILD -DBASE_IMPLEMENTATION -DIPC_IMPLEMENTATION -DCONTENT_IMPLEMENTATION -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing child_process_launcher.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_NETWORK_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtNetwork" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
     </CustomBuild>
     <ClInclude Include="libhh.h" />
   </ItemGroup>
@@ -235,7 +217,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="msvc2010" />
+      <UserProperties UicDir=".\GeneratedFiles" MocDir=".\GeneratedFiles\$(ConfigurationName)" MocOptions="" RccDir=".\GeneratedFiles" lupdateOnBuild="0" lupdateOptions="" lreleaseOptions="" Qt5Version_x0020_Win32="Qt5.5.0" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
