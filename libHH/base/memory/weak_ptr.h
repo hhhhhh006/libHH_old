@@ -71,6 +71,7 @@
 #define BASE_MEMORY_WEAK_PTR_H_
 
 #include "base/base_export.h"
+#include "base/logging.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
 
@@ -155,6 +156,10 @@ class SupportsWeakPtrBase {
   // function that makes calling this easier.
   template<typename Derived>
   static WeakPtr<Derived> StaticAsWeakPtr(Derived* t) {
+    typedef
+        is_convertible<Derived, internal::SupportsWeakPtrBase&> convertible;
+    static_assert(convertible::value,
+                  "AsWeakPtr argument must inherit from SupportsWeakPtr");
     return AsWeakPtrImpl<Derived>(t, *t);
   }
 
@@ -202,9 +207,11 @@ class WeakPtr : public internal::WeakPtrBase {
   T* get() const { return ref_.is_valid() ? ptr_ : NULL; }
 
   T& operator*() const {
+    DCHECK(get() != NULL);
     return *get();
   }
   T* operator->() const {
+    DCHECK(get() != NULL);
     return get();
   }
 
@@ -263,16 +270,19 @@ class WeakPtrFactory {
   }
 
   WeakPtr<T> GetWeakPtr() {
+    DCHECK(ptr_);
     return WeakPtr<T>(weak_reference_owner_.GetRef(), ptr_);
   }
 
   // Call this method to invalidate all existing weak pointers.
   void InvalidateWeakPtrs() {
+    DCHECK(ptr_);
     weak_reference_owner_.Invalidate();
   }
 
   // Call this method to determine if any weak pointers exist.
   bool HasWeakPtrs() const {
+    DCHECK(ptr_);
     return weak_reference_owner_.HasRefs();
   }
 

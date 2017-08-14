@@ -29,6 +29,8 @@ public slots:
 
 	void OnTestCallback(int id, QString s);
 
+    int addNUm(int num1, int num2);
+
 private:
 	Ui::TestClass ui;
 

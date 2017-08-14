@@ -60,6 +60,24 @@
     <Filter Include="base\win">
       <UniqueIdentifier>{99a8ce4c-a963-426a-bd41-e62255552609}</UniqueIdentifier>
     </Filter>
+    <Filter Include="base\strings">
+      <UniqueIdentifier>{d3f587df-69d5-443d-862e-9cebfd44b383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\third_party">
+      <UniqueIdentifier>{195b6a1e-a75b-4ef6-8df2-594968b52b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\third_party\dmg_fp">
+      <UniqueIdentifier>{6c0ea771-9d1b-48a4-be78-e21b2c3b2d4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\third_party\icu">
+      <UniqueIdentifier>{e362c7ce-f9a7-4aed-803b-55293dc754c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\numerics">
+      <UniqueIdentifier>{bceeee75-6154-47d9-9f05-7c75dea19a07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\debug">
+      <UniqueIdentifier>{fc546981-709e-40f7-a29a-24a7c72544b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libhh.cpp">
@@ -170,6 +188,81 @@
     <ClCompile Include="base\threading\thread_local_storage.cpp">
       <Filter>base\threading</Filter>
     </ClCompile>
+    <ClCompile Include="base\third_party\dmg_fp\dtoa_wrapper.cc">
+      <Filter>base\third_party\dmg_fp</Filter>
+    </ClCompile>
+    <ClCompile Include="base\third_party\dmg_fp\g_fmt.cc">
+      <Filter>base\third_party\dmg_fp</Filter>
+    </ClCompile>
+    <ClCompile Include="base\third_party\icu\icu_utf.cc">
+      <Filter>base\third_party\icu</Filter>
+    </ClCompile>
+    <ClCompile Include="base\command_line.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\vlog.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\utf_string_conversions.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\utf_string_conversion_utils.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\utf_offset_string_conversions.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\sys_string_conversions_win.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\stringprintf.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\string_util_constants.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\string_util.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\string_split.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\string_piece.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\string_number_conversions.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\pattern.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\nullable_string16.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\strings\latin1_string_conversions.cc">
+      <Filter>base\strings</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\stack_trace_win.cc">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\alias.cc">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\debugger.cc">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\debugger_win.cc">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\debug\stack_trace.cc">
+      <Filter>base\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="base\logging.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="base\memory\singleton.cpp">
+      <Filter>base\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libhh.h">
@@ -197,9 +290,6 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="Base\single_thread_task_runner.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\time.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="Base\atomicops.h">
@@ -360,6 +450,105 @@
     </ClInclude>
     <ClInclude Include="base\threading\thread_local_storage.h">
       <Filter>base\threading</Filter>
+    </ClInclude>
+    <ClInclude Include="libhh_export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="base\third_party\dmg_fp\dmg_fp.h">
+      <Filter>base\third_party\dmg_fp</Filter>
+    </ClInclude>
+    <ClInclude Include="base\third_party\icu\icu_utf.h">
+      <Filter>base\third_party\icu</Filter>
+    </ClInclude>
+    <ClInclude Include="base\command_line.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\vlog.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\utf_string_conversions.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\nullable_string16.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\pattern.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\scoped_clear_errno.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string16.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_number_conversions.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_piece.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_split.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_tokenizer.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_util.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\string_util_win.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\stringize_macros.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\stringprintf.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\sys_string_conversions.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\utf_offset_string_conversions.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\utf_string_conversion_utils.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="base\logging.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\strings\latin1_string_conversions.h">
+      <Filter>base\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\time2.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\debug\alias.h">
+      <Filter>base\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="base\debug\debugger.h">
+      <Filter>base\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="base\debug\stack_trace.h">
+      <Filter>base\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="base\numerics\safe_math_impl.h">
+      <Filter>base\numerics</Filter>
+    </ClInclude>
+    <ClInclude Include="base\numerics\safe_math.h">
+      <Filter>base\numerics</Filter>
+    </ClInclude>
+    <ClInclude Include="base\numerics\safe_conversions_impl.h">
+      <Filter>base\numerics</Filter>
+    </ClInclude>
+    <ClInclude Include="base\numerics\safe_conversions.h">
+      <Filter>base\numerics</Filter>
+    </ClInclude>
+    <ClInclude Include="base\template_util.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\memory\singleton.h">
+      <Filter>base\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

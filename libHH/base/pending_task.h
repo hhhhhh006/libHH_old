@@ -6,7 +6,7 @@
 
 #include "base/base_export.h"
 #include "base/callback.h"
-#include "base/time.h"
+#include "base/time2.h"
 
 namespace base {
 

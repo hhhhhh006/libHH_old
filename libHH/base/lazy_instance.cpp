@@ -5,8 +5,7 @@
 #include "base/lazy_instance.h"
 
 #include "base/at_exit.h"
-
-#include <QThread>
+#include "base/atomicops.h"
 
 namespace base {
 namespace internal {
@@ -29,11 +28,8 @@ bool NeedsLazyInstance(subtle::AtomicWord* state) {
   // state_ == STATE_CREATED needs to acquire visibility over
   // the associated data (buf_). Pairing Release_Store is in
   // CompleteLazyInstance().
-  
-  // QThread::yieldCurrentThread 实际调用的是 Sleep(0)
-  // 让出当前的线程执行权
   while (subtle::Acquire_Load(state) == kLazyInstanceStateCreating) {
-    QThread::yieldCurrentThread();
+      ::Sleep(0);
   }
   // Someone else created the instance.
   return false;

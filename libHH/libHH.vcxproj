@@ -45,7 +45,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;LIBHH_LIB;_DEBUG;_WINDOWS;_USRDLL;COMPONENT_BUILD;BASE_IMPLEMENTATION;IPC_IMPLEMENTATION;CONTENT_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_CORE_LIB;_DEBUG;_WINDOWS;_USRDLL;COMPONENT_BUILD;LIBHH_IMPLEMENTATION;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -56,7 +56,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -64,7 +64,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;LIBHH_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;COMPONENT_BUILD;LIBHH_IMPLEMENTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;.\Base\MessageLoop;.\Base;.\Base\Threading;.\Content;.\base\synchronization;.\base\memory;.\base\win;.\base\message_loop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -73,7 +73,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -81,20 +81,45 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="base\at_exit.cpp" />
+    <ClCompile Include="base\command_line.cpp" />
+    <ClCompile Include="base\debug\alias.cc" />
+    <ClCompile Include="base\debug\debugger.cc" />
+    <ClCompile Include="base\debug\debugger_win.cc" />
+    <ClCompile Include="base\debug\stack_trace.cc" />
+    <ClCompile Include="base\debug\stack_trace_win.cc" />
     <ClCompile Include="Base\lazy_instance.cpp" />
+    <ClCompile Include="base\logging.cpp" />
     <ClCompile Include="base\memory\aligned_memory.cpp" />
     <ClCompile Include="base\memory\ref_counted.cpp" />
+    <ClCompile Include="base\memory\singleton.cpp" />
     <ClCompile Include="base\memory\weak_ptr.cpp" />
     <ClCompile Include="base\message_loop\message_pump_ui.cpp" />
     <ClCompile Include="base\message_loop\message_pump_default.cpp" />
     <ClCompile Include="base\message_loop\message_pump_win.cpp" />
     <ClCompile Include="Base\pickle.cpp" />
+    <ClCompile Include="base\strings\latin1_string_conversions.cc" />
+    <ClCompile Include="base\strings\nullable_string16.cc" />
+    <ClCompile Include="base\strings\pattern.cc" />
+    <ClCompile Include="base\strings\stringprintf.cc" />
+    <ClCompile Include="base\strings\string_number_conversions.cc" />
+    <ClCompile Include="base\strings\string_piece.cc" />
+    <ClCompile Include="base\strings\string_split.cc" />
+    <ClCompile Include="base\strings\string_util.cc" />
+    <ClCompile Include="base\strings\string_util_constants.cc" />
+    <ClCompile Include="base\strings\sys_string_conversions_win.cc" />
+    <ClCompile Include="base\strings\utf_offset_string_conversions.cc" />
+    <ClCompile Include="base\strings\utf_string_conversions.cc" />
+    <ClCompile Include="base\strings\utf_string_conversion_utils.cc" />
     <ClCompile Include="base\synchronization\lock.cpp" />
+    <ClCompile Include="base\third_party\dmg_fp\dtoa_wrapper.cc" />
+    <ClCompile Include="base\third_party\dmg_fp\g_fmt.cc" />
+    <ClCompile Include="base\third_party\icu\icu_utf.cc" />
     <ClCompile Include="base\threading\thread.cpp" />
     <ClCompile Include="base\synchronization\waitable_event.cpp" />
     <ClCompile Include="base\threading\thread_local_storage.cpp" />
     <ClCompile Include="base\threading\thread_local_storage_win.cpp" />
     <ClCompile Include="base\threading\thread_task_runner_handle.cpp" />
+    <ClCompile Include="base\vlog.cpp" />
     <ClCompile Include="base\win\scoped_handle.cpp" />
     <ClCompile Include="Content\child_process_launcher.cpp" />
     <ClCompile Include="Content\render_process.cpp" />
@@ -131,16 +156,47 @@
     <ClInclude Include="base\at_exit.h" />
     <ClInclude Include="base\base_export.h" />
     <ClInclude Include="Base\bits.h" />
+    <ClInclude Include="base\command_line.h" />
+    <ClInclude Include="base\debug\alias.h" />
+    <ClInclude Include="base\debug\debugger.h" />
+    <ClInclude Include="base\debug\stack_trace.h" />
+    <ClInclude Include="base\logging.h" />
     <ClInclude Include="Base\macros.h" />
     <ClInclude Include="base\memory\ptr_util.h" />
     <ClInclude Include="base\memory\ref_counted.h" />
     <ClInclude Include="base\memory\scoped_vector.h" />
+    <ClInclude Include="base\memory\singleton.h" />
     <ClInclude Include="base\memory\weak_ptr.h" />
     <ClInclude Include="base\message_loop\message_pump_win.h" />
+    <ClInclude Include="base\numerics\safe_conversions.h" />
+    <ClInclude Include="base\numerics\safe_conversions_impl.h" />
+    <ClInclude Include="base\numerics\safe_math.h" />
+    <ClInclude Include="base\numerics\safe_math_impl.h" />
+    <ClInclude Include="base\scoped_clear_errno.h" />
+    <ClInclude Include="base\strings\latin1_string_conversions.h" />
+    <ClInclude Include="base\strings\nullable_string16.h" />
+    <ClInclude Include="base\strings\pattern.h" />
+    <ClInclude Include="base\strings\string16.h" />
+    <ClInclude Include="base\strings\stringize_macros.h" />
+    <ClInclude Include="base\strings\stringprintf.h" />
+    <ClInclude Include="base\strings\string_number_conversions.h" />
+    <ClInclude Include="base\strings\string_piece.h" />
+    <ClInclude Include="base\strings\string_split.h" />
+    <ClInclude Include="base\strings\string_tokenizer.h" />
+    <ClInclude Include="base\strings\string_util.h" />
+    <ClInclude Include="base\strings\string_util_win.h" />
+    <ClInclude Include="base\strings\sys_string_conversions.h" />
+    <ClInclude Include="base\strings\utf_offset_string_conversions.h" />
+    <ClInclude Include="base\strings\utf_string_conversions.h" />
+    <ClInclude Include="base\strings\utf_string_conversion_utils.h" />
     <ClInclude Include="base\synchronization\lock.h" />
+    <ClInclude Include="base\template_util.h" />
+    <ClInclude Include="base\third_party\dmg_fp\dmg_fp.h" />
+    <ClInclude Include="base\third_party\icu\icu_utf.h" />
     <ClInclude Include="base\Threading\thread_local.h" />
     <ClInclude Include="base\threading\thread_local_storage.h" />
     <ClInclude Include="base\threading\thread_task_runner_handle.h" />
+    <ClInclude Include="base\vlog.h" />
     <ClInclude Include="base\win\scoped_handle.h" />
     <ClInclude Include="Build\build_config.h" />
     <ClInclude Include="Base\compiler_specific.h" />
@@ -150,6 +206,7 @@
     <ClInclude Include="base\message_loop\message_pump_ui.h" />
     <ClInclude Include="Base\pickle.h" />
     <ClInclude Include="Base\callback.h" />
+    <ClInclude Include="libhh_export.h" />
     <CustomBuild Include="Base\Threading\thread.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -196,7 +253,7 @@
     <ClInclude Include="Base\pending_task.h" />
     <ClInclude Include="Base\task_runner.h" />
     <ClInclude Include="Base\single_thread_task_runner.h" />
-    <ClInclude Include="Base\time.h" />
+    <ClInclude Include="Base\time2.h" />
     <ClInclude Include="base\message_loop\message_pump.h" />
     <ClInclude Include="base\message_loop\message_loop.h" />
     <ClInclude Include="base\message_loop\message_loop_task_runner.h" />
@@ -204,11 +261,11 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing child_process_launcher.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DLIBHH_LIB -D_DEBUG -D_WINDOWS -D_USRDLL -DCOMPONENT_BUILD -DBASE_IMPLEMENTATION -DIPC_IMPLEMENTATION -DCONTENT_IMPLEMENTATION -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -D_DEBUG -D_WINDOWS -D_USRDLL -DCOMPONENT_BUILD -DLIBHH_IMPLEMENTATION -D_SCL_SECURE_NO_WARNINGS -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing child_process_launcher.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DLIBHH_LIB -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DCOMPONENT_BUILD -DLIBHH_IMPLEMENTATION -D_WINDLL  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I.\Base\MessageLoop" "-I.\Base" "-I.\Base\Threading" "-I.\Content" "-I.\base\synchronization" "-I.\base\memory" "-I.\base\win" "-I.\base\message_loop"</Command>
     </CustomBuild>
     <ClInclude Include="libhh.h" />
   </ItemGroup>

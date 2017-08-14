@@ -8,7 +8,9 @@ namespace base {
 namespace internal {
 
 WeakReference::Flag::Flag() : is_valid_(true) {
-
+  // Flags only become bound when checked for validity, or invalidated,
+  // so that we can check that later validity/invalidation operations on
+  // the same Flag take place on the same sequenced thread.
 }
 
 void WeakReference::Flag::Invalidate() {
@@ -46,7 +48,7 @@ WeakReference WeakReferenceOwner::GetRef() const {
   // If we hold the last reference to the Flag then create a new one.
   if (!HasRefs())
     flag_ = new WeakReference::Flag();
- 
+
   return WeakReference(flag_.get());
 }
 

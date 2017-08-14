@@ -39,6 +39,14 @@ private:
 typedef CallBack<void(void)> Closure;
 
 
+template <typename T>
+struct IgnoreResultHelper {
+    explicit IgnoreResultHelper(T functor) : functor_(std::move(functor)) {}
+    bool operator()() const { return !!functor_; }
+
+    T functor_;
+};
+
 }
 
 #endif // CALLBACK_H__

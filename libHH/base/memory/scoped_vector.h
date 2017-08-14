@@ -1,3 +1,7 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 #ifndef BASE_MEMORY_SCOPED_VECTOR_H_
 #define BASE_MEMORY_SCOPED_VECTOR_H_
 
@@ -6,6 +10,7 @@
 #include <memory>
 #include <vector>
 
+#include "base/logging.h"
 #include "base/macros.h"
 
 // ScopedVector wraps a vector deleting the elements from its
@@ -64,6 +69,7 @@ public:
     void push_back(std::unique_ptr<T> elem) { v_.push_back(elem.release()); }
 
     void pop_back() {
+        DCHECK(!empty());
         delete v_.back();
         v_.pop_back();
     }
@@ -94,8 +100,6 @@ public:
     }
 
     void clear() {
-     //   for (auto* item : *this)
-     //       delete item;
         for (auto it = v_.begin(); it != v_.end(); ++it)
             delete *it;
         v_.clear();

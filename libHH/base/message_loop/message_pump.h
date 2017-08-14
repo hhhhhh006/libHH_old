@@ -2,7 +2,7 @@
 #define MESSAGE_PUMP_H__
 
 #include "base/base_export.h"
-#include "base/time.h"
+#include "base/time2.h"
 
 namespace base {
 

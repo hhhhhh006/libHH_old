@@ -6,7 +6,7 @@
 #include "base/base_export.h"
 #include "base/callback.h"
 #include "base/pending_task.h"
-#include "base/time.h"
+#include "base/time2.h"
 #include "base/synchronization/lock.h"
 #include "base/memory/ref_counted.h"
 
